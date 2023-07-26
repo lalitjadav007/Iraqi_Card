@@ -3,6 +3,7 @@ import 'package:cards_store/home_controller.dart';
 import 'package:cards_store/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:cards_store/resources/translation_keys.dart' as translations;
 
 class HomeScreen extends GetWidget<HomeController> {
   static var name = "/home";
@@ -13,7 +14,7 @@ class HomeScreen extends GetWidget<HomeController> {
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(
-            title: Text("Gift Cards"),
+            title: Text(translations.title.tr),
             actions: [
               IconButton(
                 onPressed: () {},
@@ -56,7 +57,7 @@ class HomeScreen extends GetWidget<HomeController> {
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.settings, color: Colors.black),
-                  label: "Settings",
+                  label: translations.settings.tr,
                 ),
               ],
             ),

@@ -1,8 +1,9 @@
 import 'package:cards_store/bindings.dart';
 import 'package:cards_store/home.dart';
-import 'package:cards_store/home_controller.dart';
+import 'package:cards_store/resources/messages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:cards_store/resources/translation_keys.dart' as translations;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +17,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Cards',
+      title: translations.title.tr,
+      translations: Messages(),
+      locale: const Locale('ar', 'AR'),
+      fallbackLocale: const Locale('en', 'EN'),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
