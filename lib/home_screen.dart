@@ -34,7 +34,7 @@ class HomeScreen extends GetWidget<HomeController> {
               children: [
                 const HomePage(),
                 const CardsPage(),
-                const ProfilePage(),
+                ProfilePage(),
                 Settings(),
               ],
             );

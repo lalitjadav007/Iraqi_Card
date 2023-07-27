@@ -1,18 +1,14 @@
 import 'package:cards_store/common_widgets.dart';
+import 'package:cards_store/controller/profile_controller.dart';
 import 'package:cards_store/resources/translation_keys.dart' as translations;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'controller/image_controller.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+class ProfilePage extends GetWidget {
+  var profileController = Get.put(ProfileController());
 
-  @override
-  State<ProfilePage> createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController firstnameController = TextEditingController(text: "");
   TextEditingController lastnameController = TextEditingController(text: "");
@@ -45,17 +41,16 @@ class _ProfilePageState extends State<ProfilePage> {
                   // specify type as Controller
                   init: ImageController(),
                   builder: (value) => Container(
-                    height:150,
+                    height: 150,
                     width: 150,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: imageController.image == null
                             ? const NetworkImage(
-                            'https://picsum.photos/250?image=9')
+                                'https://picsum.photos/250?image=9')
                             : FileImage(imageController.image!)
                                 as ImageProvider,
                         fit: BoxFit.cover,
-
                       ),
                       border: Border.all(
                         width: 1.0,
@@ -68,7 +63,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 30,),
+              const SizedBox(
+                height: 30,
+              ),
               buildTextField(
                 label: translations.firstName.tr,
                 inputType: TextInputType.name,
@@ -113,10 +110,18 @@ class _ProfilePageState extends State<ProfilePage> {
                         fontSize: 18,
                       ),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState?.validate() == true) {
                         print("valid Data");
                       }
+                      Get.dialog(SizedBox(
+                          height: 40,
+                          width: 40,
+                          child: CircularProgressIndicator()));
+                      await profileController.updateProfile(
+                        emailController.text.toString().trim(),
+                      );
+                      Get.back();
                     },
                   ),
                 ),
