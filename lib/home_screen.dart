@@ -1,5 +1,8 @@
 import 'package:cards_store/cards_page.dart';
+import 'package:cards_store/home_page.dart';
+import 'package:cards_store/common_widgets.dart';
 import 'package:cards_store/home_controller.dart';
+import 'package:cards_store/profile_page.dart';
 import 'package:cards_store/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,31 +11,34 @@ import 'package:cards_store/resources/translation_keys.dart' as translations;
 class HomeScreen extends GetWidget<HomeController> {
   static var name = "/home";
 
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
       builder: (controller) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
             title: Text(translations.title.tr),
             actions: [
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.notifications),
+                icon: const Icon(Icons.notifications),
               )
             ],
           ),
-          body: Container(child: Obx(() {
+          body: Obx(() {
             return IndexedStack(
               index: controller.selectedTab.value,
               children: [
-                CardsPage(),
-                Settings(),
-                Settings(),
+                const HomePage(),
+                const CardsPage(),
+                const ProfilePage(),
                 Settings(),
               ],
             );
-          })),
+          }),
           bottomNavigationBar: Obx(
             () => BottomNavigationBar(
               showSelectedLabels: true,
@@ -43,22 +49,10 @@ class HomeScreen extends GetWidget<HomeController> {
               },
               showUnselectedLabels: false,
               items: [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.credit_card, color: Colors.black),
-                  label: "Cards",
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.group, color: Colors.black),
-                  label: "Cards",
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.credit_card, color: Colors.black),
-                  label: "Cards",
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.settings, color: Colors.black),
-                  label: translations.settings.tr,
-                ),
+                buildNavigationBarItem(Icons.home, translations.home.tr),
+                buildNavigationBarItem(Icons.credit_card, translations.cards.tr),
+                buildNavigationBarItem(Icons.group, translations.profile.tr),
+                buildNavigationBarItem(Icons.settings, translations.settings.tr),
               ],
             ),
           ),

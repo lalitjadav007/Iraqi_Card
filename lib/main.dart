@@ -1,5 +1,5 @@
 import 'package:cards_store/bindings.dart';
-import 'package:cards_store/home.dart';
+import 'package:cards_store/home_screen.dart';
 import 'package:cards_store/resources/messages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: translations.title.tr,
       translations: Messages(),
-      locale: const Locale('ar', 'AR'),
+      locale: const Locale('en', 'EN'),
       fallbackLocale: const Locale('en', 'EN'),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
