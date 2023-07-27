@@ -1,4 +1,5 @@
 import 'package:cards_store/controller/settings_controller.dart';
+import 'package:cards_store/ui/my_tickets.dart';
 import 'package:flutter/material.dart';
 import 'package:cards_store/resources/translation_keys.dart' as translations;
 import 'package:get/get.dart';
@@ -11,6 +12,7 @@ class Settings extends StatelessWidget {
     return Container(
       child: ListView(
         children: [
+          const Divider(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(
@@ -18,6 +20,7 @@ class Settings extends StatelessWidget {
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
+          const Divider(),
           GestureDetector(
             onTap: () {
               Get.updateLocale(const Locale('en', 'EN'));
@@ -64,6 +67,20 @@ class Settings extends StatelessWidget {
               ),
             ),
           ),
+          const Divider(),
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(MyTickets.name);
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Text(
+                translations.supportTickets.tr,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            ),
+          ),
+          const Divider(),
         ],
       ),
     );

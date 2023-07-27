@@ -5,5 +5,7 @@ class Ar {
     translation.title: 'كارت عراقي',
     translation.appLanguage: 'لغة التطبيق',
     translation.settings: 'إعدادات',
+    translation.supportTickets: 'تذاكر الدعم الفني',
+    translation.newString: 'جديد',
   };
 }

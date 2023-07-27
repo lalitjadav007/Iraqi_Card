@@ -5,5 +5,7 @@ class En {
     translation.title: 'Iraqi Card',
     translation.appLanguage: 'App Language',
     translation.settings: 'Settings',
+    translation.supportTickets: 'Support Tickets',
+    translation.newString: 'New',
   };
 }
