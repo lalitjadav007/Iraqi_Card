@@ -56,25 +56,52 @@ Padding buildTextField(
     {String? label,
     TextEditingController? controller,
     TextInputAction? imeAction,
-      String? prefixText = "",
-      int? maxLength,
-      String? Function(String?)? validator,
+    String? prefixText = "",
+    int? maxLength,
+    String? errorText,
     TextInputType? inputType}) {
   return Padding(
     padding: const EdgeInsets.all(10.0),
     child: TextFormField(
-      keyboardType: inputType,
-      decoration: InputDecoration(
-        prefixText: prefixText,
-        border: const OutlineInputBorder(),
-        labelText: label,
-      ),
-      controller: controller,
-      textInputAction: imeAction,
-      validator: validator,
+        keyboardType: inputType,
+        decoration: InputDecoration(
+          prefixText: prefixText,
+          border: const OutlineInputBorder(),
+          labelText: label,
+          errorText: errorText,
+        ),
+        controller: controller,
+        textInputAction: imeAction,
         inputFormatters: [
           LengthLimitingTextInputFormatter(maxLength),
-        ]
+        ]),
+  );
+}
+
+SizedBox buildButton(
+    BuildContext context, String buttonText, VoidCallback onClick) {
+  return SizedBox(
+    width: MediaQuery.of(context).size.width,
+    child: Container(
+      margin: const EdgeInsets.only(top: 30),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextButton(
+          style: TextButton.styleFrom(
+            foregroundColor: Colors.white,
+            backgroundColor: Colors.deepPurpleAccent,
+            disabledForegroundColor: Colors.grey,
+            padding: const EdgeInsets.symmetric(vertical: 15),
+          ),
+          onPressed: onClick,
+          child: Text(
+            buttonText,
+            style: const TextStyle(
+              fontSize: 18,
+            ),
+          ),
+        ),
+      ),
     ),
   );
 }

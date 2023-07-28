@@ -1,9 +1,11 @@
 import 'package:cards_store/controller/settings_controller.dart';
-import 'package:flutter/material.dart';
 import 'package:cards_store/resources/translation_keys.dart' as translations;
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Settings extends StatelessWidget {
+  static var name = "/settings";
+
   SettingsController controller = Get.put(SettingsController());
 
   @override
@@ -25,7 +27,10 @@ class Settings extends StatelessWidget {
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
-                border: Border.all(color: Get.locale?.languageCode == "en" ? Colors.blueAccent : Colors.grey),
+                border: Border.all(
+                    color: Get.locale?.languageCode == "en"
+                        ? Colors.blueAccent
+                        : Colors.grey),
                 borderRadius: BorderRadius.circular(10),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -48,7 +53,10 @@ class Settings extends StatelessWidget {
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
-                border: Border.all(color: Get.locale?.languageCode == "ar" ? Colors.blueAccent : Colors.grey),
+                border: Border.all(
+                    color: Get.locale?.languageCode == "ar"
+                        ? Colors.blueAccent
+                        : Colors.grey),
                 borderRadius: BorderRadius.circular(10),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),

@@ -2,6 +2,8 @@ import 'package:cards_store/common_widgets.dart';
 import 'package:flutter/material.dart';
 
 class CardsPage extends StatelessWidget {
+  static var name = "/cards";
+
   const CardsPage({super.key});
 
   @override
