@@ -32,110 +32,115 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     ScaffoldMessengerState toast = ScaffoldMessenger.of(context);
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text("Login"),
         centerTitle: true,
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.symmetric(vertical: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset("assets/images/app_image.png"),
-            Container(
-              margin: const EdgeInsets.only(top: 70, left: 10, right: 10),
-              child: buildTextField(
-                label: translations.username.tr,
-                inputType: TextInputType.text,
-                imeAction: TextInputAction.next,
-                maxLength: 25,
-                errorText: usernameError,
-                controller: usernameController,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset("assets/images/app_image.png"),
+              Container(
+                margin: const EdgeInsets.only(top: 70, left: 16, right: 16),
+                child: buildTextField(
+                  label: translations.username.tr,
+                  inputType: TextInputType.text,
+                  imeAction: TextInputAction.next,
+                  maxLength: 25,
+                  errorText: usernameError,
+                  controller: usernameController,
+                ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-              child: buildTextField(
-                label: translations.password.tr,
-                inputType: TextInputType.visiblePassword,
-                maxLength: 25,
-                errorText: passwordError,
-                imeAction: TextInputAction.done,
-                controller: passwordController,
+              Container(
+                margin: const EdgeInsets.only(top: 10, left: 16, right: 16),
+                child: buildTextField(
+                  label: translations.password.tr,
+                  inputType: TextInputType.visiblePassword,
+                  maxLength: 25,
+                  errorText: passwordError,
+                  imeAction: TextInputAction.done,
+                  controller: passwordController,
+                ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 10, left: 10, right: 20),
-              child: Row(
-                children: [
-                  const Spacer(),
-                  GestureDetector(
-                    child: const Text("Forgot password?"),
-                    onTap: () {},
-                  )
-                ],
+              Container(
+                margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
+                child: Row(
+                  children: [
+                    const Spacer(),
+                    GestureDetector(
+                      child: const Text("Forgot password?"),
+                      onTap: () {},
+                    )
+                  ],
+                ),
               ),
-            ),
-            buildButton(context, translations.buttonLogin.tr, () async {
-              setState(() {
-                _usernameErrorText != null ? usernameError = _usernameErrorText : usernameError = null;
-                return;
-              });
-              setState(() {
-                _passwordErrorText != null ? passwordError = _passwordErrorText : passwordError = null;
-                return;
-              });
-
-              if (_usernameErrorText == null && _passwordErrorText == null) {
-                print("Valid");
-                FocusScope.of(context).unfocus();
-
-                AlertDialog alert = AlertDialog(
-                  content: Row(children: [
-                    const CircularProgressIndicator(
-                      backgroundColor: Colors.red,
-                    ),
-                    Container(margin: const EdgeInsets.only(left: 7), child: const Text("Loading...")),
-                  ]),
-                );
-                showDialog(
-                  barrierDismissible: false,
-                  context: context,
-                  builder: (BuildContext context) {
-                    return alert;
-                  },
-                );
-
-                AuthResponse? response = await loginController.loginUser(
-                    usernameController.text.toString(),
-                    passwordController.text.toString());
-                Navigator.pop(context);
-                if (response != null) {
-                  toast.showSnackBar(SnackBar(
-                    content: Text(response.message?.success?[0] ?? ""),
-                  ));
-                  Timer(const Duration(seconds: 2), () {
-                    Get.to(const HomeScreen());
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: buildButton(context, translations.buttonLogin.tr, () async {
+                  setState(() {
+                    _usernameErrorText != null ? usernameError = _usernameErrorText : usernameError = null;
+                    return;
+                  });
+                  setState(() {
+                    _passwordErrorText != null ? passwordError = _passwordErrorText : passwordError = null;
+                    return;
                   });
 
-                }
-              }
-            }),
-            Container(
-              margin: const EdgeInsets.only(top: 20, left: 10, right: 20),
-              child: GestureDetector(
-                child: const Text(
-                  "Create account",
-                  style: TextStyle(fontSize: 18),
-                ),
-                onTap: () {
-                  Get.to(const SignupPage());
-                },
+                  if (_usernameErrorText == null && _passwordErrorText == null) {
+                    print("Valid");
+                    FocusScope.of(context).unfocus();
+
+                    AlertDialog alert = AlertDialog(
+                      content: Row(children: [
+                        const CircularProgressIndicator(
+                          backgroundColor: Colors.red,
+                        ),
+                        Container(margin: const EdgeInsets.only(left: 7), child: const Text("Loading...")),
+                      ]),
+                    );
+                    showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (BuildContext context) {
+                        return alert;
+                      },
+                    );
+
+                    AuthResponse? response = await loginController.loginUser(
+                        usernameController.text.toString(),
+                        passwordController.text.toString());
+                    Get.back();
+                    if (response != null) {
+                      if(response.message?.error != null){
+                        //Failed
+                        toast.showSnackBar(SnackBar(
+                          content: Text(response.message?.error?[0] ?? ""),
+                        ));
+                      } else {
+                        Get.toNamed(HomeScreen.name);
+                      }
+                    }
+                  }
+                }),
               ),
-            ),
-          ],
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                child: GestureDetector(
+                  child: const Text(
+                    "Create account",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  onTap: () {
+                    Get.to(const SignupPage());
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

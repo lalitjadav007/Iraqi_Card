@@ -9,9 +9,8 @@ class AuthResponse {
   AuthResponse.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     status = json['status'];
-    message =
-    json['message'] != null ? Message.fromJson(json['message']) : null;
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    message = json['message'] != null ? Message.fromJson(json['message']) : null;
+    data = json.containsKey('data') ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -30,16 +29,19 @@ class AuthResponse {
 
 class Message {
   List<String>? success;
+  List<String>? error;
 
   Message({this.success});
 
   Message.fromJson(Map<String, dynamic> json) {
-    success = json['success'].cast<String>();
+    success = json.containsKey('success') ? List<String>.from(json['success']) : null;
+    error = json.containsKey('error') ? List<String>.from(json['error'])  : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = success;
+    data['error'] = error;
     return data;
   }
 }

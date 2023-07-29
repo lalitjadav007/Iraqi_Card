@@ -20,6 +20,7 @@ class HomeScreen extends GetWidget<HomeController> {
         return Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             title: Text(translations.title.tr),
             actions: [
               IconButton(
