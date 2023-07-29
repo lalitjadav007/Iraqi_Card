@@ -6,23 +6,11 @@ import 'package:get/get.dart';
 
 import 'models/all_cards_response.dart';
 
-class CardsPage extends StatefulWidget {
+class CardsPage extends GetWidget<CardsController> {
   static var name = "/cards";
-
-  const CardsPage({super.key});
-
-  @override
-  State<CardsPage> createState() => _CardsPageState();
-}
-
-class _CardsPageState extends State<CardsPage> {
   final cardsController = Get.put(CardsController());
 
-  @override
-  void initState() {
-    super.initState();
-    cardsController.getAllCardDetails();
-  }
+  CardsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +37,7 @@ class _CardsPageState extends State<CardsPage> {
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsets.only(left: 30.0, top: 30, bottom: 5),
+                    const EdgeInsets.only(left: 30.0, top: 30, bottom: 5),
                     child: Text(
                       category.name ?? "",
                       style: Theme.of(context).textTheme.titleLarge,
@@ -62,8 +50,8 @@ class _CardsPageState extends State<CardsPage> {
                     itemCount: subCategories.length,
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2, childAspectRatio: 0.8),
+                    const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, childAspectRatio: 0.8),
                     itemBuilder: (BuildContext context, int cardIndex) {
                       var subCategory = subCategories[cardIndex];
                       return buildCardView(

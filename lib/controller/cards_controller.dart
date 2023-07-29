@@ -13,6 +13,10 @@ class CardsController extends GetxController {
   Rx<bool> loading = false.obs;
   Rx<String> message = "".obs;
 
+  CardsController(){
+    getAllCardDetails();
+  }
+
   Future<void> getAllCardDetails() async {
     loading.value = true;
     debugPrint(HttpService.getAllCardsUrl);

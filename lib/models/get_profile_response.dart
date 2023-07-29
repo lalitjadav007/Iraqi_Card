@@ -2,7 +2,7 @@ class GetProfileResponse {
   int? status;
   Data? data;
 
-  GetProfileResponse({this.status, this.data});
+  GetProfileResponse({this.status = null, this.data = null});
 
   GetProfileResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];

@@ -32,12 +32,12 @@ class MyApp extends StatelessWidget {
     ),
     GetPage(
       name: CardsPage.name,
-      page: () => const CardsPage(),
+      page: () => CardsPage(),
       binding: CardsBinding(),
     ),
     GetPage(
       name: ProfilePage.name,
-      page: () => const ProfilePage(),
+      page: () => ProfilePage(),
       binding: ProfileBinding(),
     ),
     GetPage(

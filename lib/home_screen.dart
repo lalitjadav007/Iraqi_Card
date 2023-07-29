@@ -34,8 +34,8 @@ class HomeScreen extends GetWidget<HomeController> {
               index: controller.selectedTab.value,
               children: [
                 const HomePage(),
-                const CardsPage(),
-                const ProfilePage(),
+                CardsPage(),
+                ProfilePage(),
                 Settings(),
               ],
             );

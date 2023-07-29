@@ -123,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                     Get.back();
 
                     if (response != null) {
-                      saveLoginUser(jsonEncode(response));
+                      saveLoginUser(jsonEncode(response.toJson()));
                       if (response.message?.error?.isNotEmpty == true) {
                         //Failed
                         toast.showSnackBar(SnackBar(
