@@ -69,6 +69,7 @@ class Category {
   String? status;
   String? createdAt;
   String? updatedAt;
+  List<Subcategory> subCategories = [];
 
   Category(
       {this.id,
@@ -110,6 +111,7 @@ class Subcategory {
   String? image;
   String? createdAt;
   String? updatedAt;
+  List<Cards> cards = [];
 
   Subcategory(
       {this.id,
