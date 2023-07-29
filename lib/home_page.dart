@@ -1,7 +1,7 @@
 import 'package:cards_store/common_widgets.dart';
 import 'package:cards_store/resources/translation_keys.dart' as translations;
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, childAspectRatio: 0.8),
           itemBuilder: (BuildContext context, int index) {
-            return buildCardView(context, "assets/images/google.png", "assets/images/google.png", "Google Play", "\$100");
+            return buildCardView(context, "https://iraqicard.store/assets/images/sub_categories/64c4d911c1af01690622225.png", "https://iraqicard.store/assets/images/sub_categories/64c4d911c1af01690622225.png", "Google Play", "\$100");
           },
         ),
         const SizedBox(
@@ -49,7 +49,7 @@ class HomePage extends StatelessWidget {
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, childAspectRatio: 0.8),
           itemBuilder: (BuildContext context, int index) {
-            return buildCardView(context, "assets/images/google.png", "assets/images/google.png", "Google Play", "\$100");
+            return buildCardView(context, "https://iraqicard.store/assets/images/sub_categories/64c4d911c1af01690622225.png", "https://iraqicard.store/assets/images/sub_categories/64c4d911c1af01690622225.png", "Google Play", "\$100");
           },
         ),
       ],

@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialBinding: LoginBinding(),
-      initialRoute: LoginPage.name,
+      initialBinding: HomeBinding(),
+      initialRoute: HomeScreen.name,
       getPages: [
         GetPage(
           name: HomeScreen.name,
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: CardsPage.name,
-          page: () => const CardsPage(),
+          page: () => CardsPage(),
           binding: CardsBinding(),
         ),
         GetPage(

@@ -92,19 +92,11 @@ class _LoginPageState extends State<LoginPage> {
                 print("Valid");
                 FocusScope.of(context).unfocus();
 
-                AlertDialog alert = AlertDialog(
-                  content: Row(children: [
-                    const CircularProgressIndicator(
-                      backgroundColor: Colors.red,
-                    ),
-                    Container(margin: const EdgeInsets.only(left: 7), child: const Text("Loading...")),
-                  ]),
-                );
                 showDialog(
                   barrierDismissible: false,
                   context: context,
                   builder: (BuildContext context) {
-                    return alert;
+                    return getLoadingDialog();
                   },
                 );
 

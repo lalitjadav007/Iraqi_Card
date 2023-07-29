@@ -19,7 +19,7 @@ Card buildCardView(BuildContext context, String backgroundImagePath,
           left: -50,
           child: Opacity(
             opacity: 0.05,
-            child: Image.asset(
+            child: Image.network(
               backgroundImagePath,
               height: 200,
             ),
@@ -30,7 +30,7 @@ Card buildCardView(BuildContext context, String backgroundImagePath,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(
+              Image.network(
                 imagePath,
                 height: 60,
                 width: 60,
@@ -102,6 +102,19 @@ SizedBox buildButton(
           ),
         ),
       ),
+    ),
+  );
+}
+
+AlertDialog getLoadingDialog() {
+  return AlertDialog(
+    content: Row(
+      children: [
+        const CircularProgressIndicator(),
+        Container(
+            margin: const EdgeInsets.only(left: 7),
+            child: const Text("Loading...")),
+      ],
     ),
   );
 }

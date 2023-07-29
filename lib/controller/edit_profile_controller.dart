@@ -8,7 +8,7 @@ class EditProfileController extends GetxController {
 
   Future<void> updateProfile(String email) async {
     http.Response res = await http
-        .post(Uri.parse(HttpService.updateProfileURL), body: {'email': email});
+        .post(Uri.parse(HttpService.editProfileUrl), body: {'email': email});
 
     if (res.statusCode == 200) {
       List<dynamic> body = jsonDecode(res.body);

@@ -1,6 +1,6 @@
 import 'package:cards_store/cards_page.dart';
 import 'package:cards_store/common_widgets.dart';
-import 'package:cards_store/home_controller.dart';
+import 'package:cards_store/controller/home_controller.dart';
 import 'package:cards_store/home_page.dart';
 import 'package:cards_store/profile_page.dart';
 import 'package:cards_store/resources/translation_keys.dart' as translations;
@@ -33,7 +33,7 @@ class HomeScreen extends GetWidget<HomeController> {
               index: controller.selectedTab.value,
               children: [
                 const HomePage(),
-                const CardsPage(),
+                CardsPage(),
                 const ProfilePage(),
                 Settings(),
               ],
@@ -51,7 +51,7 @@ class HomeScreen extends GetWidget<HomeController> {
               items: [
                 buildNavigationBarItem(Icons.home, translations.home.tr),
                 buildNavigationBarItem(Icons.credit_card, translations.cards.tr),
-                buildNavigationBarItem(Icons.group, translations.profile.tr),
+                buildNavigationBarItem(Icons.person, translations.profile.tr),
                 buildNavigationBarItem(Icons.settings, translations.settings.tr),
               ],
             ),

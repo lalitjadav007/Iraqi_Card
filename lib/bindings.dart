@@ -1,7 +1,7 @@
 import 'package:cards_store/controller/cards_controller.dart';
+import 'package:cards_store/controller/home_controller.dart';
 import 'package:cards_store/controller/login_controller.dart';
 import 'package:cards_store/controller/settings_controller.dart';
-import 'package:cards_store/home_controller.dart';
 import 'package:get/get.dart';
 
 import 'controller/edit_profile_controller.dart';
