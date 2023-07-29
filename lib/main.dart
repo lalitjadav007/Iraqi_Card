@@ -3,20 +3,67 @@ import 'package:cards_store/cards_page.dart';
 import 'package:cards_store/edit_profile_page.dart';
 import 'package:cards_store/home_screen.dart';
 import 'package:cards_store/login_page.dart';
+import 'package:cards_store/preferences/shared_preferences.dart';
 import 'package:cards_store/profile_page.dart';
 import 'package:cards_store/resources/messages.dart';
 import 'package:cards_store/resources/translation_keys.dart' as translations;
 import 'package:cards_store/settings.dart';
+import 'package:cards_store/signup_page.dart';
+import 'package:cards_store/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  await loadPrefs();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final List<GetPage<dynamic>>? pages = [
+    GetPage(
+      name: HomeScreen.name,
+      page: () => const HomeScreen(),
+      binding: HomeBinding(),
+    ),
+    GetPage(
+      name: CardsPage.name,
+      page: () => const CardsPage(),
+      binding: CardsBinding(),
+    ),
+    GetPage(
+      name: ProfilePage.name,
+      page: () => const ProfilePage(),
+      binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: Settings.name,
+      page: () => Settings(),
+      binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: EditProfilePage.name,
+      page: () => EditProfilePage(),
+      binding: EditProfileBinding(),
+    ),
+    GetPage(
+      name: LoginPage.name,
+      page: () => const LoginPage(),
+      binding: LoginBinding(),
+    ),
+    GetPage(
+      name: SignupPage.name,
+      page: () => const SignupPage(),
+      binding: SignupBinding(),
+    ),
+    GetPage(
+      name: SplashPage.name,
+      page: () => const SplashPage(),
+      binding: SplashBinding(),
+    ),
+  ];
 
   // This widget is the root of your application.
   @override
@@ -31,40 +78,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialBinding: HomeBinding(),
-      initialRoute: HomeScreen.name,
-      getPages: [
-        GetPage(
-          name: HomeScreen.name,
-          page: () => const HomeScreen(),
-          binding: HomeBinding(),
-        ),
-        GetPage(
-          name: CardsPage.name,
-          page: () => CardsPage(),
-          binding: CardsBinding(),
-        ),
-        GetPage(
-          name: ProfilePage.name,
-          page: () => const ProfilePage(),
-          binding: ProfileBinding(),
-        ),
-        GetPage(
-          name: Settings.name,
-          page: () => Settings(),
-          binding: SettingsBinding(),
-        ),
-        GetPage(
-          name: EditProfilePage.name,
-          page: () => EditProfilePage(),
-          binding: EditProfileBinding(),
-        ),
-        GetPage(
-          name: LoginPage.name,
-          page: () => LoginPage(),
-          binding: LoginBinding(),
-        ),
-      ],
+      initialBinding: SplashBinding(),
+      initialRoute: SplashPage.name,
+      getPages: pages,
     );
   }
 }

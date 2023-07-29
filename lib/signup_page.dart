@@ -57,7 +57,9 @@ class _SignupPageState extends State<SignupPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset("assets/images/app_image.png"),
+              const FlutterLogo(
+                size: 70,
+              ),
               Container(
                 margin: const EdgeInsets.only(top: 70, left: 10, right: 10),
                 child: buildTextField(
@@ -226,15 +228,16 @@ class _SignupPageState extends State<SignupPage> {
                     },
                   );
 
-                  RegisterResponse? response = await signupController.registerUser(
-                      firstnameController.text,
-                      lastnameController.text,
-                      usernameController.text,
-                      emailController.text,
-                      phoneController.text,
-                      passwordController.text,
-                      passwordController.text,
-                      agree.toString());
+                  RegisterResponse? response =
+                      await signupController.registerUser(
+                          firstnameController.text,
+                          lastnameController.text,
+                          usernameController.text,
+                          emailController.text,
+                          phoneController.text,
+                          passwordController.text,
+                          passwordController.text,
+                          agree.toString());
 
                   Navigator.pop(context);
                   if (response != null) {

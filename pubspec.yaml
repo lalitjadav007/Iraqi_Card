@@ -38,6 +38,7 @@ dependencies:
   get: ^4.6.5
   image_picker: ^1.0.1
   fluttertoast: ^8.2.2
+  shared_preferences: ^2.2.0
 
 dev_dependencies:
   flutter_test:

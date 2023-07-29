@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:cards_store/home_screen.dart';
 import 'package:cards_store/models/login_response.dart';
+import 'package:cards_store/preferences/shared_preferences.dart';
 import 'package:cards_store/resources/translation_keys.dart' as translations;
 import 'package:cards_store/signup_page.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +45,9 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset("assets/images/app_image.png"),
+            const FlutterLogo(
+              size: 70,
+            ),
             Container(
               margin: const EdgeInsets.only(top: 70, left: 10, right: 10),
               child: buildTextField(
@@ -80,11 +84,15 @@ class _LoginPageState extends State<LoginPage> {
             ),
             buildButton(context, translations.buttonLogin.tr, () async {
               setState(() {
-                _usernameErrorText != null ? usernameError = _usernameErrorText : usernameError = null;
+                _usernameErrorText != null
+                    ? usernameError = _usernameErrorText
+                    : usernameError = null;
                 return;
               });
               setState(() {
-                _passwordErrorText != null ? passwordError = _passwordErrorText : passwordError = null;
+                _passwordErrorText != null
+                    ? passwordError = _passwordErrorText
+                    : passwordError = null;
                 return;
               });
 
@@ -103,15 +111,16 @@ class _LoginPageState extends State<LoginPage> {
                 AuthResponse? response = await loginController.loginUser(
                     usernameController.text.toString(),
                     passwordController.text.toString());
-                Navigator.pop(context);
+                Get.back();
+
                 if (response != null) {
+                  saveLoginUser(jsonEncode(response));
                   toast.showSnackBar(SnackBar(
                     content: Text(response.message?.success?[0] ?? ""),
                   ));
                   Timer(const Duration(seconds: 2), () {
                     Get.to(const HomeScreen());
                   });
-
                 }
               }
             }),

@@ -2,6 +2,7 @@ import 'package:cards_store/controller/cards_controller.dart';
 import 'package:cards_store/controller/home_controller.dart';
 import 'package:cards_store/controller/login_controller.dart';
 import 'package:cards_store/controller/settings_controller.dart';
+import 'package:cards_store/controller/signup_controller.dart';
 import 'package:get/get.dart';
 
 import 'controller/edit_profile_controller.dart';
@@ -57,6 +58,24 @@ class LoginBinding extends Bindings {
   void dependencies() {
     Get.lazyPut(
       () => LoginController(),
+    );
+  }
+}
+
+class SignupBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut(
+      () => SignupController(),
+    );
+  }
+}
+
+class SplashBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut(
+      () => HomeController(),
     );
   }
 }
