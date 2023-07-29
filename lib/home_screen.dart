@@ -34,7 +34,7 @@ class HomeScreen extends GetWidget<HomeController> {
               index: controller.selectedTab.value,
               children: [
                 const HomePage(),
-                CardsPage(),
+                const CardsPage(),
                 const ProfilePage(),
                 Settings(),
               ],
@@ -51,9 +51,11 @@ class HomeScreen extends GetWidget<HomeController> {
               showUnselectedLabels: false,
               items: [
                 buildNavigationBarItem(Icons.home, translations.home.tr),
-                buildNavigationBarItem(Icons.credit_card, translations.cards.tr),
+                buildNavigationBarItem(
+                    Icons.credit_card, translations.cards.tr),
                 buildNavigationBarItem(Icons.person, translations.profile.tr),
-                buildNavigationBarItem(Icons.settings, translations.settings.tr),
+                buildNavigationBarItem(
+                    Icons.settings, translations.settings.tr),
               ],
             ),
           ),

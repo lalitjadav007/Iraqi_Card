@@ -6,6 +6,8 @@ import 'package:cards_store/ui/my_tickets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'login_page.dart';
+
 class Settings extends StatelessWidget {
   static var name = "/settings";
 
@@ -98,9 +100,10 @@ class Settings extends StatelessWidget {
                 title: Text(translations.logoutTitle.tr),
                 content: Text(translations.logoutMessage.tr),
                 actions: [
-                  buildSmallButton(context, translations.yesString.tr, () async{
+                  buildSmallButton(context, translations.yesString.tr,
+                      () async {
                     await controller.logout();
-                    Get.toNamed(SplashPage.name);
+                    Get.toNamed(LoginPage.name);
                   }),
                   buildSmallButton(context, translations.noString.tr, () {
                     Get.back();
