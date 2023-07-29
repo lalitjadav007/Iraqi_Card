@@ -141,10 +141,12 @@ class _SignupPageState extends State<SignupPage> {
               CheckboxListTile(
                 title: const Text(
                     'I accept all Terms of Service , Privacy Policy'),
-                value: false,
+                value: agree,
                 controlAffinity: ListTileControlAffinity.leading,
                 onChanged: (bool? value) {
-                  agree = value ?? false;
+                  setState(() {
+                    agree = value ?? false;
+                  });
                 },
               ),
               buildButton(context, translations.buttonSignup.tr, () async {

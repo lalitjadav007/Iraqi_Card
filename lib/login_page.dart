@@ -42,7 +42,9 @@ class _LoginPageState extends State<LoginPage> {
       body: Container(
         width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.symmetric(vertical: 20),
+        child: SingleChildScrollView(
         child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const FlutterLogo(
@@ -82,17 +84,15 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
-            buildButton(context, translations.buttonLogin.tr, () async {
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: buildButton(context, translations.buttonLogin.tr, () async {
               setState(() {
-                _usernameErrorText != null
-                    ? usernameError = _usernameErrorText
-                    : usernameError = null;
+                _usernameErrorText != null ? usernameError = _usernameErrorText : usernameError = null;
                 return;
               });
               setState(() {
-                _passwordErrorText != null
-                    ? passwordError = _passwordErrorText
-                    : passwordError = null;
+                _passwordErrorText != null ? passwordError = _passwordErrorText : passwordError = null;
                 return;
               });
 
@@ -115,15 +115,18 @@ class _LoginPageState extends State<LoginPage> {
 
                 if (response != null) {
                   saveLoginUser(jsonEncode(response));
-                  toast.showSnackBar(SnackBar(
-                    content: Text(response.message?.success?[0] ?? ""),
-                  ));
-                  Timer(const Duration(seconds: 2), () {
-                    Get.to(const HomeScreen());
-                  });
-                }
-              }
-            }),
+                      if(response.message?.error != null){
+                        //Failed
+                        toast.showSnackBar(SnackBar(
+                          content: Text(response.message?.error?[0] ?? ""),
+                        ));
+                      } else {
+                        Get.toNamed(HomeScreen.name);
+                      }
+                    }
+                  }
+                }),
+              ),
             Container(
               margin: const EdgeInsets.only(top: 20, left: 10, right: 20),
               child: GestureDetector(
@@ -138,6 +141,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ],
         ),
+      ),
       ),
     );
   }
