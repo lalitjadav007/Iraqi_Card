@@ -109,6 +109,29 @@ SizedBox buildButton(
   );
 }
 
+Widget buildSmallButton(
+    BuildContext context, String buttonText, VoidCallback onClick,
+    {EdgeInsets margin = const EdgeInsets.all(0)}) {
+  return Container(
+    margin: margin,
+    child: TextButton(
+      style: TextButton.styleFrom(
+        foregroundColor: Colors.deepPurpleAccent,
+        disabledForegroundColor: Colors.grey,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        padding: const EdgeInsets.symmetric(vertical: 15),
+      ),
+      onPressed: onClick,
+      child: Text(
+        buttonText,
+        style: const TextStyle(
+          fontSize: 18,
+        ),
+      ),
+    ),
+  );
+}
+
 AlertDialog getLoadingDialog() {
   return AlertDialog(
     content: Row(

@@ -2,9 +2,9 @@ import 'translation_keys.dart' as translation;
 
 class Ar {
   Map<String, String> get messages => {
-    translation.title: 'كارت عراقي',
-    translation.appLanguage: 'لغة التطبيق',
-    translation.settings: 'إعدادات',
+        translation.title: 'كارت عراقي',
+        translation.appLanguage: 'لغة التطبيق',
+        translation.settings: 'إعدادات',
         translation.home: 'بيت',
         translation.cards: 'البطاقات',
         translation.profile: 'حساب تعريفي',
@@ -25,7 +25,8 @@ class Ar {
         translation.buttonUpdateProfile: 'تحديث الملف',
         translation.firstNameValidation: 'الرجاء إدخال الاسم الأول.',
         translation.lastNameValidation: 'الرجاء إدخال الاسم الأخير.',
-        translation.emptyEmailValidation: 'الرجاء إدخال عنوان البريد الإلكتروني.',
+        translation.emptyEmailValidation:
+            'الرجاء إدخال عنوان البريد الإلكتروني.',
         translation.invalidEmailValidation:
             'الرجاء إدخال عنوان بريد إلكتروني صالح.',
         translation.phoneValidation: 'الرجاء إدخال رقم الهاتف المحمول.',
@@ -37,13 +38,20 @@ class Ar {
         translation.countryValidation: 'الرجاء إدخال الدولة.',
         translation.titleEditProfile: 'تعديل الملف الشخصي',
         translation.emptyPasswordValidation: 'الرجاء إدخال كلمة المرور.',
-        translation.emptyConfirmPasswordValidation: 'الرجاء إدخال تأكيد كلمة المرور.',
-        translation.wrongConfirmPasswordValidation: 'كلمة المرور وتأكيد كلمة المرور غير متطابقين.',
-        translation.passwordLengthValidation: 'يجب ألا يقل طول كلمة المرور عن 6 أحرف.',
+        translation.emptyConfirmPasswordValidation:
+            'الرجاء إدخال تأكيد كلمة المرور.',
+        translation.wrongConfirmPasswordValidation:
+            'كلمة المرور وتأكيد كلمة المرور غير متطابقين.',
+        translation.passwordLengthValidation:
+            'يجب ألا يقل طول كلمة المرور عن 6 أحرف.',
         translation.emptyUsernameValidation: 'الرجاء إدخال اسم المستخدم.',
         translation.buttonLogin: 'تسجيل الدخول',
         translation.buttonSignup: 'اشتراك',
-    translation.supportTickets: 'تذاكر الدعم الفني',
-    translation.newString: 'جديد',
+        translation.supportTickets: 'تذاكر الدعم الفني',
+        translation.newString: 'جديد',
+        translation.logoutMessage: 'هل تريد الخروج من هذا التطبيق؟',
+        translation.logoutTitle: 'تسجيل خروج',
+        translation.yesString: 'نعم',
+        translation.noString: 'لا',
       };
 }

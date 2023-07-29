@@ -41,3 +41,7 @@ const buttonSignup = 'buttonSignup';
 
 const supportTickets = 'supportTickets';
 const newString = 'newString';
+const logoutMessage = 'logoutMessage';
+const logoutTitle = 'logoutTitle';
+const yesString = 'yesString';
+const noString = 'noString';

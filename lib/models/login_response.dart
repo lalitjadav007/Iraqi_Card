@@ -34,8 +34,8 @@ class Message {
   Message({this.success});
 
   Message.fromJson(Map<String, dynamic> json) {
-    success = json.containsKey('success') ? List<String>.from(json['success']) : null;
-    error = json.containsKey('error') ? List<String>.from(json['error'])  : null;
+    success = json['success'] != null ? List<String>.from(json['success']) : null;
+    error = json['error'] != null ? List<String>.from(json['error'])  : null;
   }
 
   Map<String, dynamic> toJson() {
