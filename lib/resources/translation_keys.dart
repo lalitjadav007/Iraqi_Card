@@ -38,3 +38,6 @@ const emptyUsernameValidation = 'emptyUsernameValidation';
 const titleEditProfile = 'titleEditProfile';
 const buttonLogin = 'buttonLogin';
 const buttonSignup = 'buttonSignup';
+
+const supportTickets = 'supportTickets';
+const newString = 'newString';

@@ -2,9 +2,9 @@ import 'translation_keys.dart' as translation;
 
 class Ar {
   Map<String, String> get messages => {
-        translation.title: 'كارت عراقي',
-        translation.appLanguage: 'لغة التطبيق',
-        translation.settings: 'إعدادات',
+    translation.title: 'كارت عراقي',
+    translation.appLanguage: 'لغة التطبيق',
+    translation.settings: 'إعدادات',
         translation.home: 'بيت',
         translation.cards: 'البطاقات',
         translation.profile: 'حساب تعريفي',
@@ -43,5 +43,7 @@ class Ar {
         translation.emptyUsernameValidation: 'الرجاء إدخال اسم المستخدم.',
         translation.buttonLogin: 'تسجيل الدخول',
         translation.buttonSignup: 'اشتراك',
+    translation.supportTickets: 'تذاكر الدعم الفني',
+    translation.newString: 'جديد',
       };
 }

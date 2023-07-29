@@ -2,9 +2,9 @@ import 'translation_keys.dart' as translation;
 
 class En {
   Map<String, String> get messages => {
-        translation.title: 'Iraqi Card',
-        translation.appLanguage: 'App Language',
-        translation.settings: 'Settings',
+    translation.title: 'Iraqi Card',
+    translation.appLanguage: 'App Language',
+    translation.settings: 'Settings',
         translation.home: 'Home',
         translation.cards: 'Cards',
         translation.profile: 'Profile',
@@ -42,5 +42,7 @@ class En {
         translation.passwordLengthValidation: 'Password length must be at least 6 characters.',
         translation.buttonLogin: 'Login',
         translation.buttonSignup: 'Signup',
+    translation.supportTickets: 'Support Tickets',
+    translation.newString: 'New',
       };
 }

@@ -5,11 +5,15 @@ import 'package:cards_store/home_screen.dart';
 import 'package:cards_store/login_page.dart';
 import 'package:cards_store/preferences/shared_preferences.dart';
 import 'package:cards_store/profile_page.dart';
+import 'package:cards_store/controller/my_tickets_controller.dart';
+import 'package:cards_store/home.dart';
 import 'package:cards_store/resources/messages.dart';
 import 'package:cards_store/resources/translation_keys.dart' as translations;
 import 'package:cards_store/settings.dart';
 import 'package:cards_store/signup_page.dart';
 import 'package:cards_store/splash_page.dart';
+import 'package:cards_store/ui/my_tickets.dart';
+import 'package:cards_store/ui/new_ticket.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -63,6 +67,8 @@ class MyApp extends StatelessWidget {
       page: () => const SplashPage(),
       binding: SplashBinding(),
     ),
+    GetPage(name: MyTickets.name, page: () => MyTickets(), binding: MyTicketsBinding()),
+    GetPage(name: NewTicket.name, page: () => NewTicket(), binding: MyTicketsBinding()),
   ];
 
   // This widget is the root of your application.

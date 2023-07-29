@@ -1,3 +1,4 @@
+import 'package:cards_store/controller/my_tickets_controller.dart';
 import 'package:cards_store/controller/cards_controller.dart';
 import 'package:cards_store/controller/home_controller.dart';
 import 'package:cards_store/controller/login_controller.dart';
@@ -76,6 +77,15 @@ class SplashBinding extends Bindings {
   void dependencies() {
     Get.lazyPut(
       () => HomeController(),
+    );
+  }
+}
+
+class MyTicketsBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut(
+          () => MyTicketsController(),
     );
   }
 }
