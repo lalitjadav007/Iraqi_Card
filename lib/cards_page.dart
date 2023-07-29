@@ -17,12 +17,12 @@ class CardsPage extends StatefulWidget {
 
 class _CardsPageState extends State<CardsPage> {
   late Future<AllCardsResponse?> allCardsResponse;
-  final loginController = Get.put(CardsController());
+  final cardsController = Get.put(CardsController());
 
   @override
   void initState() {
     super.initState();
-    allCardsResponse = loginController.getAllCardDetails();
+    allCardsResponse = cardsController.getAllCardDetails();
   }
 
   @override
@@ -43,7 +43,8 @@ class _CardsPageState extends State<CardsPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 30.0, top: 30, bottom: 5),
+                    padding:
+                        const EdgeInsets.only(left: 30.0, top: 30, bottom: 5),
                     child: Text(
                       category?.name ?? "",
                       style: Theme.of(context).textTheme.titleLarge,
@@ -55,12 +56,17 @@ class _CardsPageState extends State<CardsPage> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: cardList?.length,
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, childAspectRatio: 0.8),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2, childAspectRatio: 0.8),
                     itemBuilder: (BuildContext context, int cardIndex) {
                       var card = cardList?[cardIndex];
-                      return buildCardView(context, "${HttpService.subcategoryImageUrl}${subCategory?.image}",
-                          "${HttpService.subcategoryImageUrl}${subCategory?.image}", "${subCategory?.name}", "\$${(double.parse(subCategory?.price ?? "0.00")).toStringAsFixed(2)}");
+                      return buildCardView(
+                          context,
+                          "${HttpService.subcategoryImageUrl}${subCategory?.image}",
+                          "${HttpService.subcategoryImageUrl}${subCategory?.image}",
+                          "${subCategory?.name}",
+                          "\$${(double.parse(subCategory?.price ?? "0.00")).toStringAsFixed(2)}");
                     },
                   ),
                 ],
@@ -68,7 +74,9 @@ class _CardsPageState extends State<CardsPage> {
             },
           );
         } else if (cardsResponse.hasError) {
-          Get.showSnackbar(const GetSnackBar(message: "Error while fetching cards data",));
+          Get.showSnackbar(const GetSnackBar(
+            message: "Error while fetching cards data",
+          ));
         }
 
         return const CircularProgressIndicator();

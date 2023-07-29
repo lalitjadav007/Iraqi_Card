@@ -1,26 +1,17 @@
-class AuthResponse {
-  int? code;
-  String? status;
-  Message? message;
+class GetProfileResponse {
+  int? status;
   Data? data;
 
-  AuthResponse({this.code, this.status, this.message, this.data});
+  GetProfileResponse({this.status, this.data});
 
-  AuthResponse.fromJson(Map<String, dynamic> json) {
-    code = json['code'];
+  GetProfileResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    message =
-        json['message'] != null ? Message.fromJson(json['message']) : Message();
-    data = json.containsKey('data') ? Data.fromJson(json['data']) : Data();
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['code'] = code;
     data['status'] = status;
-    if (message != null) {
-      data['message'] = message!.toJson();
-    }
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -28,51 +19,7 @@ class AuthResponse {
   }
 }
 
-class Message {
-  List<String>? success;
-  List<String>? error;
-
-  Message({this.success});
-
-  Message.fromJson(Map<String, dynamic> json) {
-    success =
-        json.containsKey('success') ? List<String>.from(json['success']) : [];
-    error = json.containsKey('error') ? List<String>.from(json['error']) : [];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['success'] = success;
-    data['error'] = error;
-    return data;
-  }
-}
-
 class Data {
-  User? user;
-  String? accessToken;
-  String? tokenType;
-
-  Data({this.user, this.accessToken, this.tokenType});
-
-  Data.fromJson(Map<String, dynamic> json) {
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
-    accessToken = json['access_token'];
-    tokenType = json['token_type'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (user != null) {
-      data['user'] = user!.toJson();
-    }
-    data['access_token'] = accessToken;
-    data['token_type'] = tokenType;
-    return data;
-  }
-}
-
-class User {
   int? id;
   String? firstname;
   String? lastname;
@@ -87,15 +34,15 @@ class User {
   String? status;
   String? ev;
   String? sv;
-  String? verCode;
-  String? verCodeSendAt;
+  dynamic verCode;
+  dynamic verCodeSendAt;
   String? ts;
-  int? tv;
-  String? tsc;
+  String? tv;
+  dynamic tsc;
   String? createdAt;
   String? updatedAt;
 
-  User(
+  Data(
       {this.id,
       this.firstname,
       this.lastname,
@@ -118,7 +65,7 @@ class User {
       this.createdAt,
       this.updatedAt});
 
-  User.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     firstname = json['firstname'];
     lastname = json['lastname'];
@@ -130,7 +77,7 @@ class User {
     balance = json['balance'];
     image = json['image'];
     address =
-    json['address'] != null ? Address.fromJson(json['address']) : null;
+        json['address'] != null ? Address.fromJson(json['address']) : null;
     status = json['status'];
     ev = json['ev'];
     sv = json['sv'];
