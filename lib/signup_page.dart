@@ -25,9 +25,9 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController lastnameController = TextEditingController(text: "");
   final TextEditingController emailController = TextEditingController(text: "");
   final TextEditingController passwordController =
-      TextEditingController(text: "");
+  TextEditingController(text: "");
   TextEditingController confirmPasswordController =
-      TextEditingController(text: "");
+  TextEditingController(text: "");
   TextEditingController phoneController = TextEditingController(text: "");
   TextEditingController usernameController = TextEditingController(text: "");
   String? firstnameError,
@@ -37,6 +37,11 @@ class _SignupPageState extends State<SignupPage> {
       confirmPasswordError,
       phoneError,
       usernameError;
+
+  String? mobileCode = "+93",
+      countryCode = "AF",
+      country = "Afghanistan",
+      mobile = "";
 
   bool agree = false;
 
@@ -50,7 +55,10 @@ class _SignupPageState extends State<SignupPage> {
         centerTitle: true,
       ),
       body: Container(
-        width: MediaQuery.of(context).size.width,
+        width: MediaQuery
+            .of(context)
+            .size
+            .width,
         margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         child: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -63,11 +71,17 @@ class _SignupPageState extends State<SignupPage> {
               ),
               Text(
                 "Let's get you started",
-                style: Theme.of(context).textTheme.headlineSmall,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .headlineSmall,
               ),
               Text(
                 "Fill in the form below, correctly",
-                style: Theme.of(context).textTheme.bodyLarge,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .bodyLarge,
               ),
               Container(
                 margin: const EdgeInsets.only(top: 30),
@@ -119,15 +133,18 @@ class _SignupPageState extends State<SignupPage> {
               ),
               Container(
                 margin: const EdgeInsets.only(top: 10),
-                child: buildTextField(
+                child: buildPhoneTextField(
                   context,
                   label: translations.mobileNumber.tr,
-                  inputType: TextInputType.phone,
-                  imeAction: TextInputAction.next,
+                  maxLength: 25,
                   errorText: phoneError,
-                  maxLength: 14,
-                  prefixText: "+93  ",
+                  imeAction: TextInputAction.next,
                   controller: phoneController,
+                  onNumberSelected: (phone) {
+                    mobileCode = phone.countryCode;
+                    countryCode = phone.countryISOCode;
+                    mobile = phone.number;
+                  },
                 ),
               ),
               Container(
@@ -158,7 +175,10 @@ class _SignupPageState extends State<SignupPage> {
                 contentPadding: EdgeInsets.zero,
                 title: Text(
                   'I accept all Terms of Service , Privacy Policy',
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .bodyMedium,
                 ),
                 value: agree,
                 controlAffinity: ListTileControlAffinity.leading,
@@ -234,36 +254,29 @@ class _SignupPageState extends State<SignupPage> {
 
                   FocusScope.of(context).unfocus();
 
-                  AlertDialog alert = AlertDialog(
-                    content: Row(children: [
-                      const CircularProgressIndicator(
-                        backgroundColor: Colors.red,
-                      ),
-                      Container(
-                          margin: const EdgeInsets.only(left: 7),
-                          child: const Text("Loading...")),
-                    ]),
-                  );
                   showDialog(
                     barrierDismissible: false,
                     context: context,
                     builder: (BuildContext context) {
-                      return alert;
+                      return getLoadingDialog();
                     },
                   );
 
                   RegisterResponse? response =
-                      await signupController.registerUser(
-                          firstnameController.text,
-                          lastnameController.text,
-                          usernameController.text,
-                          emailController.text,
-                          phoneController.text,
-                          passwordController.text,
-                          passwordController.text,
-                          agree.toString());
+                  await signupController.registerUser(
+                      firstnameController.text,
+                      lastnameController.text,
+                      usernameController.text,
+                      emailController.text,
+                      mobile ?? "",
+                      passwordController.text,
+                      passwordController.text,
+                      agree.toString(),
+                      mobileCode ?? "",
+                      countryCode ?? "",
+                      country ?? "");
 
-                  Navigator.pop(context);
+                  Get.back();
                   if (response != null) {
                     toast.showSnackBar(SnackBar(
                       content: Text(response.message?.success?[0] ?? ""),
@@ -281,16 +294,24 @@ class _SignupPageState extends State<SignupPage> {
                     text: TextSpan(children: [
                       TextSpan(
                           text: 'Already have an account ',
-                          style: Theme.of(context).textTheme.bodyMedium),
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .bodyMedium),
                       TextSpan(
                         text: 'Sign In',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: Colors.deepPurple,
-                            ),
-                        recognizer: TapGestureRecognizer()..onTap = () {
-                          Get.back();
-                        },
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.deepPurple,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Get.back();
+                          },
                       ),
                     ]),
                   ),

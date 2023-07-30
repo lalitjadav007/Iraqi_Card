@@ -2,21 +2,25 @@ import 'dart:convert';
 
 import 'package:cards_store/http/http_service.dart';
 import 'package:cards_store/models/register_response.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class SignupController extends GetxController {
-  Future<RegisterResponse?> registerUser(
-      String firstname,
+  Future<RegisterResponse?> registerUser(String firstname,
       String lastname,
       String username,
       String email,
       String mobile,
       String password,
       String passwordConfirmation,
-      String agree) async {
+      String agree,
+      String mobileCode,
+      String countryCode,
+      String country) async {
+    debugPrint(country);
     http.Response res =
-        await http.post(Uri.parse(HttpService.registerUrl), body: {
+    await http.post(Uri.parse(HttpService.registerUrl), body: {
       "firstname": firstname,
       "lastname": lastname,
       "username": username,
@@ -24,9 +28,9 @@ class SignupController extends GetxController {
       "mobile": mobile,
       "password": password,
       "password_confirmation": passwordConfirmation,
-      "mobile_code": "+93",
-      "country_code": "AF",
-      "country": "Afghanistan",
+      "mobile_code": mobileCode,
+      "country_code": countryCode,
+      "country": country,
       "agree": agree
     });
 

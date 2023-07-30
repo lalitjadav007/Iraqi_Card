@@ -1,7 +1,9 @@
-import 'dart:io';
+import 'dart:convert';
 
 import 'package:cards_store/common_widgets.dart';
 import 'package:cards_store/controller/edit_profile_controller.dart';
+import 'package:cards_store/models/login_response.dart';
+import 'package:cards_store/preferences/shared_preferences.dart';
 import 'package:cards_store/resources/translation_keys.dart' as translations;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,6 +16,7 @@ class EditProfilePage extends GetWidget<EditProfileController> {
   static var name = "/editProfile";
 
   EditProfilePage({super.key});
+
   ImageController imageController = ImageController();
 
   @override
@@ -41,8 +44,6 @@ class EditProfilePage extends GetWidget<EditProfileController> {
                 "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg";
               }
 
-
-
               return Column(
                 children: [
                   GestureDetector(
@@ -50,26 +51,28 @@ class EditProfilePage extends GetWidget<EditProfileController> {
                     child: GetBuilder<ImageController>(
                       // specify type as Controller
                       init: ImageController(),
-                      builder: (value) => Container(
-                        margin: const EdgeInsets.only(top: 30),
-                        height: 150,
-                        width: 150,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: imageController.image.value == null
-                                ? NetworkImage(imageUrl)
-                                : FileImage(imageController.image.value!) as ImageProvider,
-                            fit: BoxFit.cover,
+                      builder: (value) =>
+                          Container(
+                            margin: const EdgeInsets.only(top: 30),
+                            height: 150,
+                            width: 150,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: imageController.image.value == null
+                                    ? NetworkImage(imageUrl)
+                                    : FileImage(imageController.image.value!)
+                                as ImageProvider,
+                                fit: BoxFit.cover,
+                              ),
+                              border: Border.all(
+                                width: 1.0,
+                                color: Colors.grey,
+                              ),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(100.0),
+                              ),
+                            ),
                           ),
-                          border: Border.all(
-                            width: 1.0,
-                            color: Colors.grey,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(100.0),
-                          ),
-                        ),
-                      ),
                     ),
                   ),
                   const SizedBox(
@@ -102,15 +105,20 @@ class EditProfilePage extends GetWidget<EditProfileController> {
                     maxLength: 25,
                     controller: controller.emailController,
                   ),
-                  buildTextField(
+                  buildPhoneTextField(
                     context,
                     label: translations.mobileNumber.tr,
-                    inputType: TextInputType.phone,
-                    imeAction: TextInputAction.next,
+                    maxLength: 25,
                     errorText: controller.phoneError.value,
-                    maxLength: 14,
-                    prefixText: countryCode,
+                    imeAction: TextInputAction.next,
+                    initialCountryCode:
+                    controller.initialCountryCode.toString(),
                     controller: controller.phoneController,
+                    onNumberSelected: (phone) {
+                      controller.mobileCode = phone.countryCode.obs;
+                      controller.countryCode = phone.countryISOCode.obs;
+                      controller.mobile = phone.number.obs;
+                    },
                   ),
                   buildTextField(
                     context,
@@ -159,11 +167,12 @@ class EditProfilePage extends GetWidget<EditProfileController> {
                   ),
                   buildButton(
                     context,
-                    translations.buttonUpdateProfile.tr, () async{
-                      if(!controller.isValid()){
+                    translations.buttonUpdateProfile.tr,
+                        () async {
+                      FocusScope.of(context).unfocus();
+                      if (!controller.isValid()) {
                         return;
                       }
-
                       showDialog(
                         barrierDismissible: false,
                         context: context,
@@ -173,18 +182,27 @@ class EditProfilePage extends GetWidget<EditProfileController> {
                       );
 
                       UpdateProfileResponse? response;
-                      if (imageController.image.value != null) {
-                        response = await controller.updateProfile(imageController.image.value);
-                      } else {
-                        response = await controller.updateProfile();
-                      }
-
-                      Get.back();
+                      /*if (imageController.image.value != null) {
+                        response = await controller
+                            .updateProfile(imageController.image.value);
+                      } else {*/
+                      response = await controller.updateProfile();
+                      /*}*/
+                      Navigator.pop(context);
 
                       if (response != null) {
+                        debugPrint(response.message ?? "");
+
+                        AuthResponse? loginUser = getLoginUser();
+                        loginUser?.data?.user = response.data;
+                        saveLoginUser(jsonEncode(loginUser?.toJson()));
+
+
                         toast.showSnackBar(SnackBar(
                           content: Text(response.message ?? ""),
                         ));
+
+                        Navigator.pop(context);
                       }
                     },
                   ),

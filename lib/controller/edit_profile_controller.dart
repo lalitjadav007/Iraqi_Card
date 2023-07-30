@@ -31,11 +31,17 @@ class EditProfileController extends GetxController {
   Rx<String?> lastnameError = null.obs;
   Rx<String?> emailError = null.obs;
   Rx<String?> phoneError = null.obs;
+  Rx<String?> initialCountryCode = null.obs;
   Rx<String?> addressError = null.obs;
   Rx<String?> stateError = null.obs;
   Rx<String?> zipError = null.obs;
   Rx<String?> cityError = null.obs;
   Rx<String?> countryError = null.obs;
+
+  Rx<String?> mobileCode = "+93".obs,
+      countryCode = "AF".obs,
+      country = "Afghanistan".obs,
+      mobile = "".obs;
 
   EditProfileController() {
     userId = getLoginUser()?.data?.user?.id?.toString() ?? "0";
@@ -64,14 +70,14 @@ class EditProfileController extends GetxController {
 
   Future<UpdateProfileResponse?> updateProfile([File? image]) async {
     Object? body;
-
+    debugPrint(userId);
     if (image != null) {
       body = {
         "user_id": userId,
         "firstname": firstnameController.text,
         "lastname": lastnameController.text,
         "email": emailController.text,
-        "mobile": "+93" + mobileNumber,
+        "mobile": phoneController.text,
         "address": addressController.text,
         "state": stateController.text,
         "zip": zipController.text,
@@ -114,8 +120,8 @@ class EditProfileController extends GetxController {
     firstnameController.text = userProfile.value.data?.firstname ?? "";
     lastnameController.text = userProfile.value.data?.lastname ?? "";
     emailController.text = userProfile.value.data?.email ?? "";
-    var phone = userProfile.value.data?.mobile
-        ?.substring(3, userProfile.value.data?.mobile?.length);
+    var phone = userProfile.value.data?.mobile;
+    initialCountryCode = userProfile.value.data!.countryCode.obs;
     phoneController.text = phone ?? "";
     addressController.text = "${userProfile.value.data?.address?.address}";
     stateController.text = "${userProfile.value.data?.address?.state}";

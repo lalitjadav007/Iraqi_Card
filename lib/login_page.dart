@@ -24,9 +24,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   var loginController = Get.put(LoginController());
   final TextEditingController usernameController =
-      TextEditingController(text: "");
+  TextEditingController(text: "");
   final TextEditingController passwordController =
-      TextEditingController(text: "");
+  TextEditingController(text: "");
 
   String? usernameError, passwordError;
 
@@ -85,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child:
-                      buildButton(context, translations.buttonLogin.tr, () async {
+                  buildButton(context, translations.buttonLogin.tr, () async {
                     setState(() {
                       _usernameErrorText != null
                           ? usernameError = _usernameErrorText
@@ -115,6 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                       AuthResponse? response = await loginController.loginUser(
                           usernameController.text.toString(),
                           passwordController.text.toString());
+
                       Get.back();
 
                       if (response != null) {
@@ -139,7 +140,10 @@ class _LoginPageState extends State<LoginPage> {
                     padding: EdgeInsets.all(10),
                     child: Text(
                       translations.createAccount.tr,
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .bodyMedium,
                     ),
                   ),
                 ),

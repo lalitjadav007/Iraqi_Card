@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:intl_phone_field/phone_number.dart';
 
 BottomNavigationBarItem buildNavigationBarItem(IconData icon, String label) {
   return BottomNavigationBarItem(
@@ -109,6 +111,48 @@ Padding buildTextField(BuildContext context,
           inputFormatters: [
             LengthLimitingTextInputFormatter(maxLength),
           ]),
+    ),
+  );
+}
+
+Padding buildPhoneTextField(BuildContext context,
+    {String? label,
+    TextEditingController? controller,
+    TextInputAction? imeAction,
+    int? maxLength,
+    Function(PhoneNumber)? onNumberSelected,
+    String? initialCountryCode,
+    String? errorText}) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 5),
+    child: Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: const Color(0xfff7f7f9),
+      ),
+      child: IntlPhoneField(
+        keyboardType: TextInputType.phone,
+        cursorColor: Colors.black54,
+        enabled: true,
+        controller: controller,
+        textInputAction: imeAction,
+        inputFormatters: [
+          LengthLimitingTextInputFormatter(maxLength),
+        ],
+        decoration: InputDecoration(
+          enabled: true,
+          filled: true,
+          counterText: "",
+          fillColor: Colors.transparent,
+          labelText: label,
+          border: InputBorder.none,
+          hintText: label,
+          hintStyle: const TextStyle(color: Color(0xffada3a3)),
+          errorText: errorText,
+        ),
+        initialCountryCode: initialCountryCode ?? 'AF',
+        onChanged: onNumberSelected,
+      ),
     ),
   );
 }
