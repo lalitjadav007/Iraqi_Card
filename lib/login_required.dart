@@ -1,5 +1,7 @@
+import 'package:cards_store/login_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginRequired extends StatelessWidget{
   @override
@@ -15,9 +17,14 @@ class LoginRequired extends StatelessWidget{
           SizedBox(
             height: 25,
           ),
-          Text(
-            'Login Required',
-            style: Theme.of(context).textTheme.headlineMedium,
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(LoginPage.name);
+            },
+            child: Text(
+              'Login Required',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
           ),
         ],
       ),

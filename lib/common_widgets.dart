@@ -9,24 +9,39 @@ BottomNavigationBarItem buildNavigationBarItem(IconData icon, String label) {
 }
 
 Card buildCardView(BuildContext context, String backgroundImagePath,
-    String imagePath, String cardName, String cardPrice) {
+    String imagePath, String cardName, String cardPrice,
+    {bool showAtEnd = false}) {
   return Card(
     margin: const EdgeInsets.all(10),
     child: Stack(
       children: [
-        Positioned(
-          bottom: -50,
-          left: -50,
-          child: Opacity(
-            opacity: 0.05,
-            child: Image.network(
-              backgroundImagePath,
-              width: 200,
-              height: 200,
-              fit: BoxFit.fill,
-            ),
-          ),
-        ),
+        showAtEnd
+            ? Positioned(
+                right: -50,
+                bottom: -70,
+                child: Opacity(
+                  opacity: 0.05,
+                  child: Image.network(
+                    backgroundImagePath,
+                    width: 200,
+                    height: 200,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              )
+            : Positioned(
+                bottom: -50,
+                left: -50,
+                child: Opacity(
+                  opacity: 0.05,
+                  child: Image.network(
+                    backgroundImagePath,
+                    width: 200,
+                    height: 200,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -39,13 +54,19 @@ Card buildCardView(BuildContext context, String backgroundImagePath,
                 fit: BoxFit.fill,
               ),
               const Spacer(),
-              Text(
-                cardName,
-                style: Theme.of(context).textTheme.bodyLarge,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Text(
+                  cardName,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
               ),
-              Text(
-                cardPrice,
-                style: Theme.of(context).textTheme.bodyMedium,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Text(
+                  cardPrice,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
               ),
             ],
           ),
@@ -93,7 +114,8 @@ Padding buildTextField(BuildContext context,
 }
 
 SizedBox buildButton(
-    BuildContext context, String buttonText, VoidCallback onClick, {EdgeInsets margin = const EdgeInsets.only(top: 30)}) {
+    BuildContext context, String buttonText, VoidCallback onClick,
+    {EdgeInsets margin = const EdgeInsets.only(top: 30)}) {
   return SizedBox(
     width: MediaQuery.of(context).size.width,
     child: Container(
@@ -144,7 +166,9 @@ AlertDialog getLoadingDialog() {
       mainAxisSize: MainAxisSize.min,
       children: [
         CircularProgressIndicator(),
-        SizedBox(height: 5,),
+        SizedBox(
+          height: 5,
+        ),
         Text("Loading..."),
       ],
     ),

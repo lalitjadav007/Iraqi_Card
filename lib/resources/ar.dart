@@ -54,5 +54,6 @@ class Ar {
         translation.yesString: 'نعم',
         translation.noString: 'لا',
         translation.createAccount: 'إنشاء حساب',
+        translation.myCards: 'بطاقاتي',
       };
 }

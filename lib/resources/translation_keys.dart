@@ -46,3 +46,4 @@ const logoutTitle = 'logoutTitle';
 const yesString = 'yesString';
 const noString = 'noString';
 const createAccount = 'createAccount';
+const myCards = 'myCards';

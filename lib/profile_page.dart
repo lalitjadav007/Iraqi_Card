@@ -92,7 +92,7 @@ class ProfilePage extends GetWidget<ProfileController> {
                     }),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   Row(
                     children: [
@@ -144,6 +144,9 @@ class ProfilePage extends GetWidget<ProfileController> {
                             ],
                           ),
                         ),
+                      ),
+                      SizedBox(
+                        width: 10,
                       ),
                       Expanded(
                         child: Container(
@@ -197,7 +200,7 @@ class ProfilePage extends GetWidget<ProfileController> {
                     ],
                   ),
                   SizedBox(
-                    height: 0.1,
+                    height: 10,
                   ),
                   Row(
                     children: [
@@ -249,6 +252,9 @@ class ProfilePage extends GetWidget<ProfileController> {
                             ],
                           ),
                         ),
+                      ),
+                      SizedBox(
+                        width: 10,
                       ),
                       Expanded(
                         child: Container(
@@ -302,11 +308,11 @@ class ProfilePage extends GetWidget<ProfileController> {
                     ],
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   Text(
                     "My Cards",
-                    style: Theme.of(context).textTheme.titleLarge,
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                   SizedBox(
                     height: 150,
@@ -318,11 +324,13 @@ class ProfilePage extends GetWidget<ProfileController> {
                           height: 180,
                           width: 200,
                           child: buildCardView(
-                              context,
-                              'https://iraqicard.store/assets/images/sub_categories/64c4d911c1af01690622225.png',
-                              'https://iraqicard.store/assets/images/sub_categories/64c4d911c1af01690622225.png',
-                              "cardName",
-                              "100"),
+                            context,
+                            'https://iraqicard.store/assets/images/sub_categories/64c4d911c1af01690622225.png',
+                            'https://iraqicard.store/assets/images/sub_categories/64c4d911c1af01690622225.png',
+                            "cardName",
+                            "100",
+                            showAtEnd: true,
+                          ),
                         );
                       },
                       itemCount: 10,

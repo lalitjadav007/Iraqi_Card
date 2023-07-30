@@ -52,5 +52,6 @@ class En {
         translation.yesString: 'Yes',
         translation.noString: 'No',
         translation.createAccount: 'Create an account',
+        translation.myCards: 'My Cards',
       };
 }
