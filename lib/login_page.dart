@@ -24,9 +24,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   var loginController = Get.put(LoginController());
   final TextEditingController usernameController =
-  TextEditingController(text: "");
+      TextEditingController(text: "");
   final TextEditingController passwordController =
-  TextEditingController(text: "");
+      TextEditingController(text: "");
 
   String? usernameError, passwordError;
 
@@ -40,10 +40,7 @@ class _LoginPageState extends State<LoginPage> {
         centerTitle: true,
       ),
       body: Container(
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
+        width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.symmetric(vertical: 20),
         child: SingleChildScrollView(
           child: Column(
@@ -90,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child:
-                buildButton(context, translations.buttonLogin.tr, () async {
+                    buildButton(context, translations.buttonLogin.tr, () async {
                   setState(() {
                     _usernameErrorText != null
                         ? usernameError = _usernameErrorText
@@ -140,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                 margin: const EdgeInsets.only(top: 20, left: 10, right: 20),
                 child: GestureDetector(
                   child: const Text(
-                    "Create account",
+                    "Create an account",
                     style: TextStyle(fontSize: 18),
                   ),
                   onTap: () {

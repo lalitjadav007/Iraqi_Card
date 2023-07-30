@@ -89,16 +89,19 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        textSelectionTheme: const TextSelectionThemeData(
+          selectionHandleColor: Colors.grey,
+        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-          backgroundColor: Colors.deepPurple,
-          textStyle: Theme.of(context)
-              .textTheme
-              .titleMedium
-              ?.copyWith(fontWeight: FontWeight.w600),
-          foregroundColor: Colors.white,
-        )),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+              backgroundColor: Colors.deepPurple,
+              textStyle: Theme.of(context)
+                  .textTheme
+                  .titleMedium
+                  ?.copyWith(fontWeight: FontWeight.w600),
+              foregroundColor: Colors.white,
+            )),
       ),
       initialBinding: getLoginUser() != null ? HomeBinding() : SplashBinding(),
       initialRoute: getLoginUser() != null ? HomeScreen.name : SplashPage.name,
