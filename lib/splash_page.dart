@@ -17,25 +17,61 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Timer(const Duration(seconds: 3), () {
-      if (getLoginUser() != null) {
-        Get.offAndToNamed(HomeScreen.name);
-      } else {
-        Get.offAndToNamed(LoginPage.name);
-      }
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Center(
-        child: FlutterLogo(
-          size: MediaQuery.of(context).size.width / 2,
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 30,
+            ),
+            Text(
+              "Want to buy card?",
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            Text(
+              "We has cards of your interest",
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            Flexible(
+              child: Image.asset("assets/images/info_page.png"),
+              flex: 5,
+            ),
+            Spacer(flex: 1),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Get.offAndToNamed(LoginPage.name);
+                      },
+                      child: Text("Sign In"),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Get.offAndToNamed(HomeScreen.name);
+                      },
+                      child: Text("Get Started"),
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.deepPurple,
+                        backgroundColor: Colors.white70,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

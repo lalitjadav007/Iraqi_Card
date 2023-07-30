@@ -87,9 +87,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+            backgroundColor: Colors.deepPurple,
+            textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+            foregroundColor: Colors.white,
+          )
+        ),
       ),
-      initialBinding: SplashBinding(),
-      initialRoute: SplashPage.name,
+      initialBinding: getLoginUser() != null ? HomeBinding() : SplashBinding(),
+      initialRoute: getLoginUser() != null ? HomeScreen.name : SplashPage.name,
       getPages: pages,
     );
   }
