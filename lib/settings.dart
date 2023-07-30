@@ -1,5 +1,6 @@
 import 'package:cards_store/common_widgets.dart';
 import 'package:cards_store/controller/settings_controller.dart';
+import 'package:cards_store/language_settings.dart';
 import 'package:cards_store/preferences/shared_preferences.dart';
 import 'package:cards_store/resources/translation_keys.dart' as translations;
 import 'package:cards_store/splash_page.dart';
@@ -19,23 +20,28 @@ class Settings extends StatelessWidget {
     return Container(
       child: ListView(
         children: [
-          Container(
-            decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(color: Theme.of(context).dividerColor),
-                  bottom: BorderSide(color: Theme.of(context).dividerColor),
-                )
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            child: Row(
-              children: [
-                Icon(Icons.language),
-                SizedBox(width: 10,),
-                Text(
-                  translations.appLanguage.tr,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-              ],
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(LangaugeSettings.name);
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(color: Theme.of(context).dividerColor),
+                    bottom: BorderSide(color: Theme.of(context).dividerColor),
+                  )
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              child: Row(
+                children: [
+                  Icon(Icons.language),
+                  SizedBox(width: 10,),
+                  Text(
+                    translations.appLanguage.tr,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ],
+              ),
             ),
           ),
           GestureDetector(

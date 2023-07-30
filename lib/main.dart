@@ -2,6 +2,7 @@ import 'package:cards_store/bindings.dart';
 import 'package:cards_store/cards_page.dart';
 import 'package:cards_store/edit_profile_page.dart';
 import 'package:cards_store/home_screen.dart';
+import 'package:cards_store/language_settings.dart';
 import 'package:cards_store/login_page.dart';
 import 'package:cards_store/preferences/shared_preferences.dart';
 import 'package:cards_store/profile_page.dart';
@@ -73,6 +74,7 @@ class MyApp extends StatelessWidget {
         name: NewTicket.name,
         page: () => NewTicket(),
         binding: MyTicketsBinding()),
+    GetPage(name: LangaugeSettings.name, page: () => LangaugeSettings()),
   ];
 
   // This widget is the root of your application.
@@ -88,13 +90,15 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
         elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-            backgroundColor: Colors.deepPurple,
-            textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
-            foregroundColor: Colors.white,
-          )
-        ),
+            style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+          backgroundColor: Colors.deepPurple,
+          textStyle: Theme.of(context)
+              .textTheme
+              .titleMedium
+              ?.copyWith(fontWeight: FontWeight.w600),
+          foregroundColor: Colors.white,
+        )),
       ),
       initialBinding: getLoginUser() != null ? HomeBinding() : SplashBinding(),
       initialRoute: getLoginUser() != null ? HomeScreen.name : SplashPage.name,
