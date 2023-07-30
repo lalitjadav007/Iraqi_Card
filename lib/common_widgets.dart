@@ -64,20 +64,34 @@ Padding buildTextField(
     String? errorText,
     TextInputType? inputType}) {
   return Padding(
-    padding: const EdgeInsets.all(10.0),
-    child: TextFormField(
-        keyboardType: inputType,
-        decoration: InputDecoration(
-          prefixText: prefixText,
-          border: const OutlineInputBorder(),
-          labelText: label,
-          errorText: errorText,
-        ),
-        controller: controller,
-        textInputAction: imeAction,
-        inputFormatters: [
-          LengthLimitingTextInputFormatter(maxLength),
-        ]),
+    padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+    child: Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: const Color(0xfff7f7f9),
+      ),
+      child: TextFormField(
+          keyboardType: inputType,
+          cursorColor: Colors.grey,
+          style: const TextStyle(fontSize: 20, color: Color(0xffada3a3)),
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.transparent,
+            prefixText: prefixText,
+            labelText: label,
+            labelStyle: const TextStyle(fontSize: 18, color: Color(0xff888585)),
+            border: InputBorder.none,
+            focusColor: Colors.grey,
+            hintText: label,
+            hintStyle: const TextStyle(color: Color(0xffada3a3)),
+            errorText: errorText,
+          ),
+          controller: controller,
+          textInputAction: imeAction,
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(maxLength),
+          ]),
+    ),
   );
 }
 

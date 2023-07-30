@@ -45,23 +45,37 @@ class _SignupPageState extends State<SignupPage> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: const Text("Signup"),
+        title: const Text("Create an account"),
         centerTitle: true,
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
-        margin: const EdgeInsets.symmetric(vertical: 20),
+        margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         child: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           physics: const ScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const FlutterLogo(
-                size: 70,
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                "Let's get you started",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold),
+              ),
+              const Text(
+                "Fill in the form below, correctly",
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 22,
+                    fontWeight: FontWeight.normal),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 70, left: 10, right: 10),
+                margin: const EdgeInsets.only(top: 30),
                 child: buildTextField(
                   label: translations.firstName.tr,
                   inputType: TextInputType.name,
@@ -72,7 +86,7 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+                margin: const EdgeInsets.only(top: 10),
                 child: buildTextField(
                   label: translations.lastName.tr,
                   inputType: TextInputType.name,
@@ -83,7 +97,7 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+                margin: const EdgeInsets.only(top: 10),
                 child: buildTextField(
                   label: translations.username.tr,
                   inputType: TextInputType.name,
@@ -94,7 +108,7 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+                margin: const EdgeInsets.only(top: 10),
                 child: buildTextField(
                   label: translations.emailAddress.tr,
                   inputType: TextInputType.emailAddress,
@@ -105,7 +119,7 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+                margin: const EdgeInsets.only(top: 10),
                 child: buildTextField(
                   label: translations.mobileNumber.tr,
                   inputType: TextInputType.phone,
@@ -117,7 +131,7 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+                margin: const EdgeInsets.only(top: 10),
                 child: buildTextField(
                   label: translations.password.tr,
                   inputType: TextInputType.visiblePassword,
@@ -128,7 +142,7 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+                margin: const EdgeInsets.only(top: 10),
                 child: buildTextField(
                   label: translations.confirmPassword.tr,
                   inputType: TextInputType.visiblePassword,

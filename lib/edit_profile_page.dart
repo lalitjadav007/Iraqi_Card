@@ -6,10 +6,16 @@ import 'package:get/get.dart';
 
 import 'controller/image_controller.dart';
 
-class EditProfilePage extends GetWidget {
-
+class EditProfilePage extends StatefulWidget {
   static var name = "/editProfile";
 
+  const EditProfilePage({super.key});
+
+  @override
+  State<EditProfilePage> createState() => _EditProfilePageState();
+}
+
+class _EditProfilePageState extends State<EditProfilePage> {
   var profileController = Get.put(EditProfileController());
 
   final _formKey = GlobalKey<FormState>();
@@ -17,6 +23,8 @@ class EditProfilePage extends GetWidget {
   TextEditingController lastnameController = TextEditingController(text: "");
   TextEditingController emailController = TextEditingController(text: "");
   TextEditingController phoneController = TextEditingController(text: "");
+
+  String? firstnameError, lastnameError, emailError, phoneError;
 
   late Image _image;
   ImageController imageController = ImageController();
@@ -72,7 +80,7 @@ class EditProfilePage extends GetWidget {
                 buildTextField(
                   label: translations.firstName.tr,
                   inputType: TextInputType.name,
-                  errorText: _firstNameErrorText,
+                  errorText: firstnameError,
                   imeAction: TextInputAction.next,
                   maxLength: 25,
                   controller: firstnameController,
@@ -80,7 +88,7 @@ class EditProfilePage extends GetWidget {
                 buildTextField(
                   label: translations.lastName.tr,
                   inputType: TextInputType.name,
-                  errorText: _lastNameErrorText,
+                  errorText: lastnameError,
                   maxLength: 25,
                   imeAction: TextInputAction.next,
                   controller: lastnameController,
@@ -88,7 +96,7 @@ class EditProfilePage extends GetWidget {
                 buildTextField(
                   label: translations.emailAddress.tr,
                   inputType: TextInputType.emailAddress,
-                  errorText: _emailErrorText,
+                  errorText: emailError,
                   imeAction: TextInputAction.next,
                   maxLength: 25,
                   controller: emailController,
@@ -97,14 +105,15 @@ class EditProfilePage extends GetWidget {
                   label: translations.mobileNumber.tr,
                   inputType: TextInputType.phone,
                   imeAction: TextInputAction.next,
-                  errorText: _phoneErrorText,
+                  errorText: phoneError,
                   maxLength: 14,
                   prefixText: "+91",
                   controller: phoneController,
                 ),
-                buildButton(context, translations.buttonUpdateProfile.tr, () => (){
+                buildButton(context, translations.buttonUpdateProfile.tr, () =>
+                    () {
                   if (_formKey.currentState?.validate() == true) {
-                    print("valid Data");
+
                   }
                 }),
               ],
