@@ -38,6 +38,7 @@ const emptyUsernameValidation = 'emptyUsernameValidation';
 const titleEditProfile = 'titleEditProfile';
 const buttonLogin = 'buttonLogin';
 const buttonSignup = 'buttonSignup';
+const balance = 'balance';
 
 const supportTickets = 'supportTickets';
 const newString = 'newString';
@@ -47,3 +48,5 @@ const yesString = 'yesString';
 const noString = 'noString';
 const createAccount = 'createAccount';
 const myCards = 'myCards';
+const transaction = 'transaction';
+const ticket = 'ticket';

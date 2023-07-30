@@ -55,5 +55,8 @@ class Ar {
         translation.noString: 'لا',
         translation.createAccount: 'إنشاء حساب',
         translation.myCards: 'بطاقاتي',
+        translation.transaction: 'عملية',
+        translation.balance: 'توازن',
+        translation.ticket: 'تذكرة',
       };
 }

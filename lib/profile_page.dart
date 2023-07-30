@@ -6,7 +6,7 @@ import 'package:cards_store/models/get_profile_response.dart';
 import 'package:cards_store/preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:cards_store/resources/translation_keys.dart' as translations;
 import 'controller/profile_controller.dart';
 
 class ProfilePage extends GetWidget<ProfileController> {
@@ -129,7 +129,7 @@ class ProfilePage extends GetWidget<ProfileController> {
                                         .headlineSmall,
                                   ),
                                   Text(
-                                    "Balance",
+                                    translations.balance.tr,
                                     style:
                                         Theme.of(context).textTheme.bodyMedium,
                                   ),
@@ -181,7 +181,7 @@ class ProfilePage extends GetWidget<ProfileController> {
                                         .headlineSmall,
                                   ),
                                   Text(
-                                    "Cards",
+                                    translations.cards.tr,
                                     style:
                                         Theme.of(context).textTheme.bodyMedium,
                                   ),
@@ -237,7 +237,7 @@ class ProfilePage extends GetWidget<ProfileController> {
                                         .headlineSmall,
                                   ),
                                   Text(
-                                    "Transaction",
+                                    translations.transaction.tr,
                                     style:
                                         Theme.of(context).textTheme.bodyMedium,
                                   ),
@@ -289,7 +289,7 @@ class ProfilePage extends GetWidget<ProfileController> {
                                         .headlineSmall,
                                   ),
                                   Text(
-                                    "Ticket",
+                                    translations.ticket.tr,
                                     style:
                                         Theme.of(context).textTheme.bodyMedium,
                                   ),
@@ -311,7 +311,7 @@ class ProfilePage extends GetWidget<ProfileController> {
                     height: 20,
                   ),
                   Text(
-                    "My Cards",
+                    translations.myCards.tr,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   SizedBox(

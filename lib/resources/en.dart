@@ -53,5 +53,8 @@ class En {
         translation.noString: 'No',
         translation.createAccount: 'Create an account',
         translation.myCards: 'My Cards',
+        translation.transaction: 'Transaction',
+        translation.balance: 'Balance',
+        translation.ticket: 'Ticket',
       };
 }
