@@ -51,5 +51,6 @@ class En {
         translation.logoutTitle: 'Logout',
         translation.yesString: 'Yes',
         translation.noString: 'No',
+        translation.createAccount: 'Create an account',
       };
 }

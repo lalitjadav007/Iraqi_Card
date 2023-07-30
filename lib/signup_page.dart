@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cards_store/login_page.dart';
 import 'package:cards_store/models/register_response.dart';
 import 'package:cards_store/resources/translation_keys.dart' as translations;
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -50,7 +51,7 @@ class _SignupPageState extends State<SignupPage> {
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
-        margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         child: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           physics: const ScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
@@ -60,23 +61,18 @@ class _SignupPageState extends State<SignupPage> {
               const SizedBox(
                 height: 20,
               ),
-              const Text(
+              Text(
                 "Let's get you started",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
-              const Text(
+              Text(
                 "Fill in the form below, correctly",
-                style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 22,
-                    fontWeight: FontWeight.normal),
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               Container(
                 margin: const EdgeInsets.only(top: 30),
                 child: buildTextField(
+                  context,
                   label: translations.firstName.tr,
                   inputType: TextInputType.name,
                   errorText: firstnameError,
@@ -88,6 +84,7 @@ class _SignupPageState extends State<SignupPage> {
               Container(
                 margin: const EdgeInsets.only(top: 10),
                 child: buildTextField(
+                  context,
                   label: translations.lastName.tr,
                   inputType: TextInputType.name,
                   errorText: lastnameError,
@@ -99,6 +96,7 @@ class _SignupPageState extends State<SignupPage> {
               Container(
                 margin: const EdgeInsets.only(top: 10),
                 child: buildTextField(
+                  context,
                   label: translations.username.tr,
                   inputType: TextInputType.name,
                   errorText: usernameError,
@@ -110,6 +108,7 @@ class _SignupPageState extends State<SignupPage> {
               Container(
                 margin: const EdgeInsets.only(top: 10),
                 child: buildTextField(
+                  context,
                   label: translations.emailAddress.tr,
                   inputType: TextInputType.emailAddress,
                   imeAction: TextInputAction.next,
@@ -121,6 +120,7 @@ class _SignupPageState extends State<SignupPage> {
               Container(
                 margin: const EdgeInsets.only(top: 10),
                 child: buildTextField(
+                  context,
                   label: translations.mobileNumber.tr,
                   inputType: TextInputType.phone,
                   imeAction: TextInputAction.next,
@@ -133,6 +133,7 @@ class _SignupPageState extends State<SignupPage> {
               Container(
                 margin: const EdgeInsets.only(top: 10),
                 child: buildTextField(
+                  context,
                   label: translations.password.tr,
                   inputType: TextInputType.visiblePassword,
                   maxLength: 25,
@@ -144,6 +145,7 @@ class _SignupPageState extends State<SignupPage> {
               Container(
                 margin: const EdgeInsets.only(top: 10),
                 child: buildTextField(
+                  context,
                   label: translations.confirmPassword.tr,
                   inputType: TextInputType.visiblePassword,
                   maxLength: 25,
@@ -153,8 +155,11 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               CheckboxListTile(
-                title: const Text(
-                    'I accept all Terms of Service , Privacy Policy'),
+                contentPadding: EdgeInsets.zero,
+                title: Text(
+                  'I accept all Terms of Service , Privacy Policy',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
                 value: agree,
                 controlAffinity: ListTileControlAffinity.leading,
                 onChanged: (bool? value) {
@@ -162,6 +167,9 @@ class _SignupPageState extends State<SignupPage> {
                     agree = value ?? false;
                   });
                 },
+              ),
+              SizedBox(
+                height: 20,
               ),
               buildButton(context, translations.buttonSignup.tr, () async {
                 setState(() {
@@ -265,7 +273,29 @@ class _SignupPageState extends State<SignupPage> {
                     });
                   }
                 }
-              }),
+              }, margin: EdgeInsets.zero),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: RichText(
+                    text: TextSpan(children: [
+                      TextSpan(
+                          text: 'Already have an account ',
+                          style: Theme.of(context).textTheme.bodyMedium),
+                      TextSpan(
+                        text: 'Sign In',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.deepPurple,
+                            ),
+                        recognizer: TapGestureRecognizer()..onTap = () {
+                          Get.back();
+                        },
+                      ),
+                    ]),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

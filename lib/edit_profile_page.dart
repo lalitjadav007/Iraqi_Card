@@ -78,6 +78,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   height: 30,
                 ),
                 buildTextField(
+                  context,
                   label: translations.firstName.tr,
                   inputType: TextInputType.name,
                   errorText: firstnameError,
@@ -86,6 +87,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   controller: firstnameController,
                 ),
                 buildTextField(
+                  context,
                   label: translations.lastName.tr,
                   inputType: TextInputType.name,
                   errorText: lastnameError,
@@ -94,6 +96,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   controller: lastnameController,
                 ),
                 buildTextField(
+                  context,
                   label: translations.emailAddress.tr,
                   inputType: TextInputType.emailAddress,
                   errorText: emailError,
@@ -102,6 +105,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   controller: emailController,
                 ),
                 buildTextField(
+                  context,
                   label: translations.mobileNumber.tr,
                   inputType: TextInputType.phone,
                   imeAction: TextInputAction.next,

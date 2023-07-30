@@ -53,5 +53,6 @@ class Ar {
         translation.logoutTitle: 'تسجيل خروج',
         translation.yesString: 'نعم',
         translation.noString: 'لا',
+        translation.createAccount: 'إنشاء حساب',
       };
 }

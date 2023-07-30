@@ -35,117 +35,116 @@ class _LoginPageState extends State<LoginPage> {
     ScaffoldMessengerState toast = ScaffoldMessenger.of(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: const Text("Login"),
-        centerTitle: true,
-      ),
       body: Container(
-        width: MediaQuery.of(context).size.width,
-        margin: const EdgeInsets.symmetric(vertical: 20),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const FlutterLogo(
-                size: 70,
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 70, left: 10, right: 10),
-                child: buildTextField(
-                  label: translations.username.tr,
-                  inputType: TextInputType.text,
-                  imeAction: TextInputAction.next,
-                  maxLength: 25,
-                  errorText: usernameError,
-                  controller: usernameController,
+        padding: EdgeInsets.symmetric(horizontal: 16,),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const FlutterLogo(
+                  size: 70,
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-                child: buildTextField(
-                  label: translations.password.tr,
-                  inputType: TextInputType.visiblePassword,
-                  maxLength: 25,
-                  errorText: passwordError,
-                  imeAction: TextInputAction.done,
-                  controller: passwordController,
+                Container(
+                  margin: const EdgeInsets.only(top: 70, left: 10, right: 10),
+                  child: buildTextField(
+                    context,
+                    label: translations.username.tr,
+                    inputType: TextInputType.text,
+                    imeAction: TextInputAction.next,
+                    maxLength: 25,
+                    errorText: usernameError,
+                    controller: usernameController,
+                  ),
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 10, left: 10, right: 20),
-                child: Row(
-                  children: [
-                    const Spacer(),
-                    GestureDetector(
-                      child: const Text("Forgot password?"),
-                      onTap: () {},
-                    )
-                  ],
+                Container(
+                  margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+                  child: buildTextField(
+                    context,
+                    label: translations.password.tr,
+                    inputType: TextInputType.visiblePassword,
+                    maxLength: 25,
+                    errorText: passwordError,
+                    imeAction: TextInputAction.done,
+                    controller: passwordController,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child:
-                    buildButton(context, translations.buttonLogin.tr, () async {
-                  setState(() {
-                    _usernameErrorText != null
-                        ? usernameError = _usernameErrorText
-                        : usernameError = null;
-                    return;
-                  });
-                  setState(() {
-                    _passwordErrorText != null
-                        ? passwordError = _passwordErrorText
-                        : passwordError = null;
-                    return;
-                  });
+                Container(
+                  margin: const EdgeInsets.only(top: 10, left: 10, right: 20),
+                  child: Row(
+                    children: [
+                      const Spacer(),
+                      GestureDetector(
+                        child: const Text("Forgot password?"),
+                        onTap: () {},
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child:
+                      buildButton(context, translations.buttonLogin.tr, () async {
+                    setState(() {
+                      _usernameErrorText != null
+                          ? usernameError = _usernameErrorText
+                          : usernameError = null;
+                      return;
+                    });
+                    setState(() {
+                      _passwordErrorText != null
+                          ? passwordError = _passwordErrorText
+                          : passwordError = null;
+                      return;
+                    });
 
-                  if (_usernameErrorText == null &&
-                      _passwordErrorText == null) {
-                    print("Valid");
-                    FocusScope.of(context).unfocus();
+                    if (_usernameErrorText == null &&
+                        _passwordErrorText == null) {
+                      print("Valid");
+                      FocusScope.of(context).unfocus();
 
-                    showDialog(
-                      barrierDismissible: false,
-                      context: context,
-                      builder: (BuildContext context) {
-                        return getLoadingDialog();
-                      },
-                    );
+                      showDialog(
+                        barrierDismissible: false,
+                        context: context,
+                        builder: (BuildContext context) {
+                          return getLoadingDialog();
+                        },
+                      );
 
-                    AuthResponse? response = await loginController.loginUser(
-                        usernameController.text.toString(),
-                        passwordController.text.toString());
-                    Get.back();
+                      AuthResponse? response = await loginController.loginUser(
+                          usernameController.text.toString(),
+                          passwordController.text.toString());
+                      Get.back();
 
-                    if (response != null) {
-                      saveLoginUser(jsonEncode(response.toJson()));
-                      if (response.message?.error?.isNotEmpty == true) {
-                        //Failed
-                        toast.showSnackBar(SnackBar(
-                          content: Text(response.message?.error?[0] ?? ""),
-                        ));
-                      } else {
-                        Get.toNamed(HomeScreen.name);
+                      if (response != null) {
+                        saveLoginUser(jsonEncode(response.toJson()));
+                        if (response.message?.error?.isNotEmpty == true) {
+                          //Failed
+                          toast.showSnackBar(SnackBar(
+                            content: Text(response.message?.error?[0] ?? ""),
+                          ));
+                        } else {
+                          Get.toNamed(HomeScreen.name);
+                        }
                       }
                     }
-                  }
-                }),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 20, left: 10, right: 20),
-                child: GestureDetector(
-                  child: const Text(
-                    "Create an account",
-                    style: TextStyle(fontSize: 18),
-                  ),
+                  }),
+                ),
+                GestureDetector(
                   onTap: () {
                     Get.to(const SignupPage());
                   },
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      translations.createAccount.tr,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

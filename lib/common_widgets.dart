@@ -55,7 +55,7 @@ Card buildCardView(BuildContext context, String backgroundImagePath,
   );
 }
 
-Padding buildTextField(
+Padding buildTextField(BuildContext context,
     {String? label,
     TextEditingController? controller,
     TextInputAction? imeAction,
@@ -64,24 +64,21 @@ Padding buildTextField(
     String? errorText,
     TextInputType? inputType}) {
   return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+    padding: const EdgeInsets.symmetric(vertical: 5),
     child: Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
         color: const Color(0xfff7f7f9),
       ),
       child: TextFormField(
           keyboardType: inputType,
-          cursorColor: Colors.grey,
-          style: const TextStyle(fontSize: 20, color: Color(0xffada3a3)),
+          cursorColor: Colors.black54,
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.transparent,
             prefixText: prefixText,
             labelText: label,
-            labelStyle: const TextStyle(fontSize: 18, color: Color(0xff888585)),
             border: InputBorder.none,
-            focusColor: Colors.grey,
             hintText: label,
             hintStyle: const TextStyle(color: Color(0xffada3a3)),
             errorText: errorText,
@@ -96,20 +93,14 @@ Padding buildTextField(
 }
 
 SizedBox buildButton(
-    BuildContext context, String buttonText, VoidCallback onClick) {
+    BuildContext context, String buttonText, VoidCallback onClick, {EdgeInsets margin = const EdgeInsets.only(top: 30)}) {
   return SizedBox(
     width: MediaQuery.of(context).size.width,
     child: Container(
-      margin: const EdgeInsets.only(top: 30),
+      margin: margin,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: TextButton(
-          style: TextButton.styleFrom(
-            foregroundColor: Colors.white,
-            backgroundColor: Colors.deepPurpleAccent,
-            disabledForegroundColor: Colors.grey,
-            padding: const EdgeInsets.symmetric(vertical: 15),
-          ),
+        child: ElevatedButton(
           onPressed: onClick,
           child: Text(
             buttonText,
@@ -147,13 +138,14 @@ Widget buildSmallButton(
 }
 
 AlertDialog getLoadingDialog() {
-  return AlertDialog(
-    content: Row(
+  return const AlertDialog(
+    content: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        const CircularProgressIndicator(),
-        Container(
-            margin: const EdgeInsets.only(left: 7),
-            child: const Text("Loading...")),
+        CircularProgressIndicator(),
+        SizedBox(height: 5,),
+        Text("Loading..."),
       ],
     ),
   );
