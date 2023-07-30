@@ -185,7 +185,6 @@ class EditProfilePage extends GetWidget<EditProfileController> {
                         toast.showSnackBar(SnackBar(
                           content: Text(response.message ?? ""),
                         ));
-                        Get.back();
                       }
                     },
                   ),

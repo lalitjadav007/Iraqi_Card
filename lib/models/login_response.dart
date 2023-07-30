@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class AuthResponse {
   int? code;
   String? status;
@@ -118,6 +120,7 @@ class User {
       this.updatedAt});
 
   User.fromJson(Map<String, dynamic> json) {
+    debugPrint(json.toString());
     id = json['id'];
     firstname = json['firstname'];
     lastname = json['lastname'];
@@ -136,7 +139,7 @@ class User {
     verCode = json['ver_code'];
     verCodeSendAt = json['ver_code_send_at'];
     ts = json['ts'];
-    tv = json['tv'];
+    tv = int.tryParse(json['tv'].toString());
     tsc = json['tsc'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
