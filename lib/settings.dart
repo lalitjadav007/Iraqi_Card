@@ -46,7 +46,11 @@ class Settings extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Get.toNamed(MyTickets.name);
+              if(getLoginUser() == null){
+                Get.offAllNamed(LoginPage.name);
+              } else {
+                Get.toNamed(MyTickets.name);
+              }
             },
             child: Container(
               decoration: BoxDecoration(
