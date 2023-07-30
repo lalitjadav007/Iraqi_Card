@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -10,16 +11,17 @@ class ImageController extends GetxController {
   String? imagePath;
   final _picker = ImagePicker();
 
-  Future<void> getImageFromCamera() async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+  Future<File?> getImageFromGallery() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
       image = File(pickedFile.path);
       imagePath = pickedFile.path;
-      print(imagePath);
-      update();
+      debugPrint(imagePath);
+      return image;
     } else {
-      print('No image selected.');
+      debugPrint('No image selected.');
+      return null;
     }
   }
 }

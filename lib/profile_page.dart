@@ -35,6 +35,15 @@ class ProfilePage extends GetWidget<ProfileController> {
                     child: Obx(() {
                       var profileDetails = controller.userProfile.value.data;
                       if (profileDetails != null) {
+                        var imageUrl = "";
+                        if (profileDetails.image != null &&
+                            profileDetails.image?.isNotEmpty == true) {
+                          imageUrl =
+                              "${HttpService.profileImageUrl}${profileDetails.image}";
+                        } else {
+                          imageUrl =
+                              "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg";
+                        }
                         return Card(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
@@ -50,7 +59,7 @@ class ProfilePage extends GetWidget<ProfileController> {
                                   borderRadius: BorderRadius.circular(50),
                                   image: DecorationImage(
                                       image: NetworkImage(
-                                        "${HttpService.profileImageUrl}${profileDetails.image}",
+                                        imageUrl,
                                       ),
                                       fit: BoxFit.cover),
                                 ),
@@ -82,7 +91,7 @@ class ProfilePage extends GetWidget<ProfileController> {
                             ],
                           ),
                         );
-                      } else if (controller.userProfile.value.data != null) {
+                      } else if (controller.userProfile.value.data == null) {
                         Get.showSnackbar(const GetSnackBar(
                           message: "Error while fetching profile data",
                         ));
