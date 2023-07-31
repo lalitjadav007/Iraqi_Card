@@ -10,70 +10,79 @@ BottomNavigationBarItem buildNavigationBarItem(IconData icon, String label) {
   );
 }
 
-Card buildCardView(BuildContext context, String backgroundImagePath,
-    String imagePath, String cardName, String cardPrice,
-    {bool showAtEnd = false}) {
+Card buildCardView(
+  BuildContext context,
+  String backgroundImagePath,
+  String imagePath,
+  String cardName,
+  String cardPrice, {
+  bool showAtEnd = false,
+  VoidCallback? onTap,
+}) {
   return Card(
     margin: const EdgeInsets.all(10),
-    child: Stack(
-      children: [
-        showAtEnd
-            ? Positioned(
-                right: -50,
-                bottom: -70,
-                child: Opacity(
-                  opacity: 0.05,
-                  child: Image.network(
-                    backgroundImagePath,
-                    width: 200,
-                    height: 200,
-                    fit: BoxFit.fill,
+    child: GestureDetector(
+      onTap: onTap,
+      child: Stack(
+        children: [
+          showAtEnd
+              ? Positioned(
+                  right: -50,
+                  bottom: -70,
+                  child: Opacity(
+                    opacity: 0.05,
+                    child: Image.network(
+                      backgroundImagePath,
+                      width: 200,
+                      height: 200,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                )
+              : Positioned(
+                  bottom: -50,
+                  left: -50,
+                  child: Opacity(
+                    opacity: 0.05,
+                    child: Image.network(
+                      backgroundImagePath,
+                      width: 200,
+                      height: 200,
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
-              )
-            : Positioned(
-                bottom: -50,
-                left: -50,
-                child: Opacity(
-                  opacity: 0.05,
-                  child: Image.network(
-                    backgroundImagePath,
-                    width: 200,
-                    height: 200,
-                    fit: BoxFit.fill,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image.network(
+                  imagePath,
+                  height: 60,
+                  width: 60,
+                  fit: BoxFit.fill,
+                ),
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Text(
+                    cardName,
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
-              ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Image.network(
-                imagePath,
-                height: 60,
-                width: 60,
-                fit: BoxFit.fill,
-              ),
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Text(
-                  cardName,
-                  style: Theme.of(context).textTheme.bodyLarge,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Text(
+                    cardPrice,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Text(
-                  cardPrice,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 }

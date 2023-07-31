@@ -1,3 +1,4 @@
+import 'package:cards_store/controller/card_details_controller.dart';
 import 'package:cards_store/controller/my_tickets_controller.dart';
 import 'package:cards_store/controller/cards_controller.dart';
 import 'package:cards_store/controller/home_controller.dart';
@@ -13,7 +14,7 @@ class HomeBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(
-      () => HomeController(),
+          () => HomeController(),
     );
   }
 }
@@ -22,7 +23,7 @@ class SettingsBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(
-      () => SettingsController(),
+          () => SettingsController(),
     );
   }
 }
@@ -31,7 +32,7 @@ class CardsBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(
-      () => CardsController(),
+          () => CardsController(),
     );
   }
 }
@@ -40,7 +41,7 @@ class ProfileBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(
-      () => ProfileController(),
+          () => ProfileController(),
     );
   }
 }
@@ -49,7 +50,7 @@ class EditProfileBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(
-      () => EditProfileController(),
+          () => EditProfileController(),
     );
   }
 }
@@ -58,7 +59,7 @@ class LoginBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(
-      () => LoginController(),
+          () => LoginController(),
     );
   }
 }
@@ -67,7 +68,7 @@ class SignupBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(
-      () => SignupController(),
+          () => SignupController(),
     );
   }
 }
@@ -76,7 +77,7 @@ class SplashBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(
-      () => HomeController(),
+          () => HomeController(),
     );
   }
 }
@@ -88,4 +89,14 @@ class MyTicketsBinding extends Bindings {
           () => MyTicketsController(),
     );
   }
+}
+
+class CardDetailsBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut(
+          () => CardsDetailsController(),
+    );
+  }
+
 }

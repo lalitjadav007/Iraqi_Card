@@ -1,10 +1,9 @@
+import 'package:cards_store/card_details_page.dart';
 import 'package:cards_store/common_widgets.dart';
 import 'package:cards_store/controller/cards_controller.dart';
 import 'package:cards_store/http/http_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'models/all_cards_response.dart';
 
 class CardsPage extends GetWidget<CardsController> {
   static var name = "/cards";
@@ -16,7 +15,7 @@ class CardsPage extends GetWidget<CardsController> {
   Widget build(BuildContext context) {
     return Obx(() {
       if (cardsController.loading.value) {
-        return CircularProgressIndicator();
+        return const CircularProgressIndicator();
       } else {
         if (cardsController.message.value.isNotEmpty) {
           Get.showSnackbar(const GetSnackBar(
@@ -37,7 +36,7 @@ class CardsPage extends GetWidget<CardsController> {
                 children: [
                   Padding(
                     padding:
-                    const EdgeInsets.only(left: 30.0, top: 30, bottom: 5),
+                        const EdgeInsets.only(left: 30.0, top: 30, bottom: 5),
                     child: Text(
                       category.name ?? "",
                       style: Theme.of(context).textTheme.titleLarge,
@@ -50,16 +49,22 @@ class CardsPage extends GetWidget<CardsController> {
                     itemCount: subCategories.length,
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, childAspectRatio: 0.8),
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2, childAspectRatio: 0.8),
                     itemBuilder: (BuildContext context, int cardIndex) {
                       var subCategory = subCategories[cardIndex];
                       return buildCardView(
-                          context,
-                          "${HttpService.subcategoryImageUrl}${subCategory.image}",
-                          "${HttpService.subcategoryImageUrl}${subCategory.image}",
-                          "${subCategory.name}",
-                          "\$${(double.parse(subCategory.price ?? "0.00")).toStringAsFixed(2)}");
+                        context,
+                        "${HttpService.subcategoryImageUrl}${subCategory.image}",
+                        "${HttpService.subcategoryImageUrl}${subCategory.image}",
+                        "${subCategory.name}",
+                        "\$${(double.parse(subCategory.price ?? "0.00")).toStringAsFixed(2)}",
+                        onTap: () {
+                          Get.toNamed(CardDetailsPage.name, arguments: [
+                            {"subcategory_id": subCategory.id}
+                          ]);
+                        },
+                      );
                     },
                   ),
                 ],
