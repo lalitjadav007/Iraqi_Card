@@ -21,7 +21,11 @@ class HomeScreen extends GetWidget<HomeController> {
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            title: Text(translations.title.tr),
+            title: Image.asset(
+              "assets/images/app_logo.png",
+              scale: 1.0,
+              height: 80,
+            ),
             actions: [
               IconButton(
                 onPressed: () {},
