@@ -35,8 +35,8 @@ class CardsPage extends GetWidget<CardsController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsets.only(left: 30.0, top: 30, bottom: 5),
+                    padding: const EdgeInsets.only(
+                        left: 30.0, top: 30, bottom: 5, right: 30.0),
                     child: Text(
                       category.name ?? "",
                       style: Theme.of(context).textTheme.titleLarge,

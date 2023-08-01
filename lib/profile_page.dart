@@ -29,8 +29,10 @@ class ProfilePage extends GetWidget<ProfileController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      Get.toNamed(EditProfilePage.name);
+                    onTap: () async {
+                      await Get.toNamed(EditProfilePage.name);
+                      controller.getUserProfile(
+                          getLoginUser()?.data?.user?.id?.toString() ?? "0");
                     },
                     child: Obx(() {
                       var profileDetails = controller.userProfile.value.data;
@@ -100,7 +102,7 @@ class ProfilePage extends GetWidget<ProfileController> {
                       return const Center(child: CircularProgressIndicator());
                     }),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Row(
@@ -114,21 +116,21 @@ class ProfilePage extends GetWidget<ProfileController> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.account_balance_wallet,
                                 size: 32,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   Text(
@@ -142,19 +144,19 @@ class ProfilePage extends GetWidget<ProfileController> {
                                     style:
                                         Theme.of(context).textTheme.bodyMedium,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                             ],
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Expanded(
@@ -166,21 +168,21 @@ class ProfilePage extends GetWidget<ProfileController> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.credit_card,
                                 size: 32,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   Text(
@@ -194,12 +196,12 @@ class ProfilePage extends GetWidget<ProfileController> {
                                     style:
                                         Theme.of(context).textTheme.bodyMedium,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                             ],
@@ -208,7 +210,7 @@ class ProfilePage extends GetWidget<ProfileController> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
@@ -222,21 +224,21 @@ class ProfilePage extends GetWidget<ProfileController> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.airplane_ticket,
                                 size: 32,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   Text(
@@ -250,19 +252,19 @@ class ProfilePage extends GetWidget<ProfileController> {
                                     style:
                                         Theme.of(context).textTheme.bodyMedium,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                             ],
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Expanded(
@@ -274,21 +276,21 @@ class ProfilePage extends GetWidget<ProfileController> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.credit_card,
                                 size: 32,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   Text(
@@ -302,12 +304,12 @@ class ProfilePage extends GetWidget<ProfileController> {
                                     style:
                                         Theme.of(context).textTheme.bodyMedium,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                             ],
