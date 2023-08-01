@@ -56,5 +56,12 @@ class En {
         translation.transaction: 'Transaction',
         translation.balance: 'Balance',
         translation.ticket: 'Ticket',
+        translation.buyGiftCards: 'Buy gift cards',
+        translation.category: 'Category:',
+        translation.subcategory: 'Subcategory:',
+        translation.availableCards: 'Available cards:',
+        translation.selectQuantity: 'Select quantity:',
+        translation.total: 'Total :',
+        translation.submit: 'Submit',
       };
 }

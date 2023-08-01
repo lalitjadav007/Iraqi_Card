@@ -58,5 +58,12 @@ class Ar {
         translation.transaction: 'عملية',
         translation.balance: 'توازن',
         translation.ticket: 'تذكرة',
+        translation.buyGiftCards: 'شراء بطاقات الهدايا',
+        translation.category: 'فئة:',
+        translation.subcategory: 'تصنيف فرعي:',
+        translation.availableCards: 'البطاقات المتاحة:',
+        translation.selectQuantity: 'حدد الكمية:',
+        translation.total: 'المجموع:',
+        translation.submit: 'يُقدِّم',
       };
 }

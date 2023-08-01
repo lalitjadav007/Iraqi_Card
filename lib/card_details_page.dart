@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import 'controller/card_details_controller.dart';
 import 'http/http_service.dart';
+import 'package:cards_store/resources/translation_keys.dart' as translations;
 
 class CardDetailsPage extends GetWidget<CardsDetailsController> {
   static var name = "/cardDetails";
@@ -17,7 +18,7 @@ class CardDetailsPage extends GetWidget<CardsDetailsController> {
     double? spacing = 30;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Buy gift cards"),
+        title: Text(translations.buyGiftCards.tr),
       ),
       body: Obx(
         () {
@@ -51,28 +52,28 @@ class CardDetailsPage extends GetWidget<CardsDetailsController> {
                         height: spacing,
                       ),
                       Text(
-                        "Category: ${cardDetails?.categoryName}",
+                        "${translations.category.tr} ${cardDetails?.categoryName}",
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       SizedBox(
                         height: spacing,
                       ),
                       Text(
-                        "Subcategory: ${cardDetails?.subcategoryName}",
+                        "${translations.subcategory.tr} ${cardDetails?.subcategoryName}",
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       SizedBox(
                         height: spacing,
                       ),
                       Text(
-                        "Available cards: ${cardDetails?.cardCount}",
+                        "${translations.availableCards.tr} ${cardDetails?.cardCount}",
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       SizedBox(
                         height: spacing,
                       ),
                       Text(
-                        "Select quantity:",
+                        translations.selectQuantity.tr,
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       SizedBox(
@@ -141,7 +142,7 @@ class CardDetailsPage extends GetWidget<CardsDetailsController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Total :",
+                            translations.total.tr,
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                           Text(
@@ -157,9 +158,9 @@ class CardDetailsPage extends GetWidget<CardsDetailsController> {
                           onPressed: () {
                             //Get.offAndToNamed(LoginPage.name);
                           },
-                          child: const Text(
-                            "Submit",
-                            style: TextStyle(
+                          child: Text(
+                            translations.submit.tr,
+                            style: const TextStyle(
                               fontSize: 18,
                             ),
                           ),

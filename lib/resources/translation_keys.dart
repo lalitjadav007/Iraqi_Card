@@ -39,6 +39,13 @@ const titleEditProfile = 'titleEditProfile';
 const buttonLogin = 'buttonLogin';
 const buttonSignup = 'buttonSignup';
 const balance = 'balance';
+const buyGiftCards = 'buyGiftCards';
+const category = 'category';
+const subcategory = 'subcategory';
+const availableCards = 'availableCards';
+const selectQuantity = 'selectQuantity';
+const total = 'total';
+const submit = 'submit';
 
 const supportTickets = 'supportTickets';
 const newString = 'newString';
