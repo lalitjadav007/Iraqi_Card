@@ -37,7 +37,7 @@ class HomeScreen extends GetWidget<HomeController> {
             return IndexedStack(
               index: controller.selectedTab.value,
               children: [
-                const HomePage(),
+                HomePage(),
                 CardsPage(),
                 ProfilePage(),
                 Settings(),

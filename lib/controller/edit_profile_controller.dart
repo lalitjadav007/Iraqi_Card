@@ -117,17 +117,20 @@ class EditProfileController extends GetxController {
   }
 
   void setupData() {
-    firstnameController.text = userProfile.value.data?.firstname ?? "";
-    lastnameController.text = userProfile.value.data?.lastname ?? "";
-    emailController.text = userProfile.value.data?.email ?? "";
-    var phone = userProfile.value.data?.mobile;
-    initialCountryCode = userProfile.value.data!.countryCode.obs;
+    firstnameController.text = userProfile.value.data?[0].user?.firstname ?? "";
+    lastnameController.text = userProfile.value.data?[0].user?.lastname ?? "";
+    emailController.text = userProfile.value.data?[0].user?.email ?? "";
+    var phone = userProfile.value.data?[0].user?.mobile;
+    initialCountryCode.value =
+        userProfile.value.data?[0].user?.countryCode ?? "AF";
     phoneController.text = phone ?? "";
-    addressController.text = "${userProfile.value.data?.address?.address}";
-    stateController.text = "${userProfile.value.data?.address?.state}";
-    zipController.text = "${userProfile.value.data?.address?.zip}";
-    cityController.text = "${userProfile.value.data?.address?.city}";
-    countryController.text = "${userProfile.value.data?.address?.country}";
+    addressController.text =
+        "${userProfile.value.data?[0].user?.address?.address}";
+    stateController.text = "${userProfile.value.data?[0].user?.address?.state}";
+    zipController.text = "${userProfile.value.data?[0].user?.address?.zip}";
+    cityController.text = "${userProfile.value.data?[0].user?.address?.city}";
+    countryController.text =
+        "${userProfile.value.data?[0].user?.address?.country}";
   }
 
   bool isValid() {

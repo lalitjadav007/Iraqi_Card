@@ -1,15 +1,21 @@
 import 'package:cards_store/common_widgets.dart';
+import 'package:cards_store/controller/home_controller.dart';
 import 'package:cards_store/resources/translation_keys.dart' as translations;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+import 'http/http_service.dart';
+
+class HomePage extends GetWidget<HomeController> {
+  static var name = "/homePage";
+  final homeController = Get.put(HomeController());
+
+  HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -30,27 +36,44 @@ class HomePage extends StatelessWidget {
             style: Theme.of(context).textTheme.titleMedium,
           ),
         ),
-        SizedBox(
-          height: 200,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 3,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            itemBuilder: (BuildContext context, int index) {
-              return AspectRatio(
-                aspectRatio: 1.5,
-                child: buildCardView(
-                  context,
-                  "https://iraqicard.store/assets/images/sub_categories/64c4d911c1af01690622225.png",
-                  "https://iraqicard.store/assets/images/sub_categories/64c4d911c1af01690622225.png",
-                  "Google Play",
-                  "\$100",
-                  showAtEnd: true,
+        Obx(() {
+          if (homeController.recommendedLoading.value) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            if (homeController.message.value.isNotEmpty) {
+              Get.showSnackbar(const GetSnackBar(
+                message: "Error while fetching recommended data",
+              ));
+              return Center(
+                child: Text(homeController.message.value),
+              );
+            } else {
+              var recommendedCardsList = homeController.recommendedCards;
+              return SizedBox(
+                height: 200,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: recommendedCardsList.length,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  itemBuilder: (BuildContext context, int index) {
+                    var recommendedCard = recommendedCardsList[index];
+                    return AspectRatio(
+                      aspectRatio: 1.5,
+                      child: buildCardView(
+                        context,
+                        "${HttpService.subcategoryImageUrl}${recommendedCard.subcategoryImage}",
+                        "${HttpService.subcategoryImageUrl}${recommendedCard.subcategoryImage}",
+                        "${recommendedCard.categoryName} ${recommendedCard.subcategoryName}",
+                        "\$${(double.parse(recommendedCard.price ?? "0.00")).toStringAsFixed(2)}",
+                        showAtEnd: true,
+                      ),
+                    );
+                  },
                 ),
               );
-            },
-          ),
-        ),
+            }
+          }
+        }),
         const SizedBox(
           height: 10.0,
         ),
@@ -61,23 +84,45 @@ class HomePage extends StatelessWidget {
             style: Theme.of(context).textTheme.titleMedium,
           ),
         ),
-        GridView.builder(
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: 5,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, childAspectRatio: 0.8),
-          itemBuilder: (BuildContext context, int index) {
-            return buildCardView(
-                context,
-                "https://iraqicard.store/assets/images/sub_categories/64c4d911c1af01690622225.png",
-                "https://iraqicard.store/assets/images/sub_categories/64c4d911c1af01690622225.png",
-                "Google Play",
-                "\$100");
-          },
-        ),
+        Obx(() {
+          if (homeController.featuredLoading.value) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            if (homeController.message.value.isNotEmpty) {
+              Get.showSnackbar(const GetSnackBar(
+                message: "Error while fetching featured data",
+              ));
+              return Center(
+                child: Text(homeController.message.value),
+              );
+            } else {
+              var featuredCardsList = homeController.allCards;
+              return Expanded(
+                child: GridView.builder(
+                  controller: homeController.scrollController,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  itemCount: featuredCardsList.length,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.8,
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    var featuredCard = featuredCardsList[index];
+                    return buildCardView(
+                        context,
+                        "${HttpService.subcategoryImageUrl}${featuredCard.subcategoryImage}",
+                        "${HttpService.subcategoryImageUrl}${featuredCard.subcategoryImage}",
+                        "${featuredCard.categoryName} ${featuredCard.subcategoryName}",
+                        "\$${(double.parse(featuredCard.price ?? "0.00")).toStringAsFixed(2)}");
+                  },
+                ),
+              );
+            }
+          }
+        }),
       ],
     );
   }

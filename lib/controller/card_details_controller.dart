@@ -3,6 +3,7 @@ import 'package:cards_store/models/card_details_response.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:zaincash/zaincash.dart';
 
 import '../http/http_service.dart';
 
@@ -15,6 +16,8 @@ class CardsDetailsController extends GetxController {
   Rx<bool> loading = false.obs;
 
   Rx<int> quantity = 1.obs;
+
+  Rx<String> paymentState = "0".obs;
 
   increaseQuantity() =>
       quantity.value = quantity.value < cardDetails.value!.cardCount!.toInt()
@@ -30,6 +33,12 @@ class CardsDetailsController extends GetxController {
     debugPrint("subcategoryId:: $subcategoryId");
     getCardDetails();
     super.onInit();
+
+    ZaincashService.paymentStateListener.listen((state) {
+      if (state == 1) {
+        paymentState.value = state.toString();
+      }
+    });
   }
 
   Future<void> getCardDetails() async {
@@ -41,7 +50,7 @@ class CardsDetailsController extends GetxController {
 
     if (res.statusCode == 200) {
       CardDetailsResponse response =
-          CardDetailsResponse.fromJson(jsonDecode(res.body));
+      CardDetailsResponse.fromJson(jsonDecode(res.body));
       debugPrint("cardDetails---> ${response.cardDetails.toString()}");
       if (response.status == 1) {
         if (response.cardDetails != null) {

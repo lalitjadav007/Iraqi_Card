@@ -2,11 +2,11 @@ import 'package:cards_store/common_widgets.dart';
 import 'package:cards_store/edit_profile_page.dart';
 import 'package:cards_store/http/http_service.dart';
 import 'package:cards_store/login_required.dart';
-import 'package:cards_store/models/get_profile_response.dart';
 import 'package:cards_store/preferences/shared_preferences.dart';
+import 'package:cards_store/resources/translation_keys.dart' as translations;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cards_store/resources/translation_keys.dart' as translations;
+
 import 'controller/profile_controller.dart';
 
 class ProfilePage extends GetWidget<ProfileController> {
@@ -38,13 +38,14 @@ class ProfilePage extends GetWidget<ProfileController> {
                     },
                     child: Obx(
                       () {
-                        var profileDetails = controller.userProfile.value.data;
+                        var profileDetails =
+                            controller.userProfile.value.data?[0];
                         if (profileDetails != null) {
                           var imageUrl = "";
-                          if (profileDetails.image != null &&
-                              profileDetails.image?.isNotEmpty == true) {
+                          if (profileDetails.user?.image != null &&
+                              profileDetails.user?.image?.isNotEmpty == true) {
                             imageUrl =
-                                "${HttpService.profileImageUrl}${profileDetails.image}";
+                                "${HttpService.profileImageUrl}${profileDetails.user?.image}";
                           } else {
                             imageUrl =
                                 "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg";
@@ -75,22 +76,23 @@ class ProfilePage extends GetWidget<ProfileController> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "${profileDetails.firstname} ${profileDetails.lastname}",
+                                      "${profileDetails.user?.firstname} ${profileDetails.user?.lastname}",
                                       style: Theme.of(context)
                                           .textTheme
                                           .headlineSmall,
                                     ),
                                     Text(
-                                      "${profileDetails.email}",
+                                      "${profileDetails.user?.email}",
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyMedium,
                                     ),
                                     Text(
-                                      profileDetails.mobile?.contains("+") ==
+                                      profileDetails.user?.mobile
+                                                  ?.contains("+") ==
                                               true
-                                          ? "${profileDetails.mobile}"
-                                          : "+${profileDetails.mobile}",
+                                          ? "${profileDetails.user?.mobile}"
+                                          : "+${profileDetails.user?.mobile}",
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyMedium,

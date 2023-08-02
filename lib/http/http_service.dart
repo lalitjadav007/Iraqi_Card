@@ -10,4 +10,6 @@ class HttpService {
   static const String getCardDetailsUrl = "${baseURL}cardDetails";
   static const String getProfileUrl = "${baseURL}profile";
   static const String editProfileUrl = "${baseURL}editProfile";
+  static const String homeDataUrl = "${baseURL}home";
+  static const String recommendedCardsUrl = "${baseURL}recommendedCard";
 }

@@ -1,25 +1,64 @@
 class GetProfileResponse {
   int? status;
-  Data? data;
+  List<Data>? data;
 
-  GetProfileResponse({this.status = null, this.data = null});
+  GetProfileResponse({this.status, this.data});
 
   GetProfileResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(Data.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = status;
     if (this.data != null) {
-      data['data'] = this.data!.toJson();
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class Data {
+  int? transaction;
+  int? ticket;
+  User? user;
+  List<Card>? card;
+
+  Data({this.transaction, this.ticket, this.user, this.card});
+
+  Data.fromJson(Map<String, dynamic> json) {
+    transaction = json['transaction'];
+    ticket = json['ticket'];
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
+    if (json['card'] != null) {
+      card = <Card>[];
+      json['card'].forEach((v) {
+        card!.add(Card.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['transaction'] = transaction;
+    data['ticket'] = ticket;
+    if (user != null) {
+      data['user'] = user!.toJson();
+    }
+    if (card != null) {
+      data['card'] = card!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class User {
   int? id;
   String? firstname;
   String? lastname;
@@ -42,7 +81,7 @@ class Data {
   String? createdAt;
   String? updatedAt;
 
-  Data(
+  User(
       {this.id,
       this.firstname,
       this.lastname,
@@ -65,7 +104,7 @@ class Data {
       this.createdAt,
       this.updatedAt});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     firstname = json['firstname'];
     lastname = json['lastname'];
@@ -143,6 +182,47 @@ class Address {
     data['zip'] = zip;
     data['country'] = country;
     data['city'] = city;
+    return data;
+  }
+}
+
+class Card {
+  String? cardId;
+  String? details;
+  String? categoryName;
+  String? subcategoryId;
+  String? subcategoryName;
+  String? subcategoryImage;
+  String? price;
+
+  Card(
+      {this.cardId,
+      this.details,
+      this.categoryName,
+      this.subcategoryId,
+      this.subcategoryName,
+      this.subcategoryImage,
+      this.price});
+
+  Card.fromJson(Map<String, dynamic> json) {
+    cardId = json['card_id'];
+    details = json['details'];
+    categoryName = json['category_name'];
+    subcategoryId = json['subcategory_id'];
+    subcategoryName = json['subcategory_name'];
+    subcategoryImage = json['subcategory_image'];
+    price = json['price'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['card_id'] = cardId;
+    data['details'] = details;
+    data['category_name'] = categoryName;
+    data['subcategory_id'] = subcategoryId;
+    data['subcategory_name'] = subcategoryName;
+    data['subcategory_image'] = subcategoryImage;
+    data['price'] = price;
     return data;
   }
 }

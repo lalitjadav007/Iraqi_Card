@@ -31,17 +31,18 @@ class EditProfilePage extends GetWidget<EditProfileController> {
         child: SingleChildScrollView(
           physics: const ScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           child: Obx(() {
-            var userDetails = controller.userProfile.value.data;
+            var userDetails = controller.userProfile.value.data?[0];
             if (userDetails != null) {
-              var countryCode = "${userDetails.mobile!.substring(0, 3)} ";
+              var countryCode = "${userDetails.user?.mobile!.substring(0, 3)} ";
 
               var imageUrl = "";
-              if (userDetails.image != null &&
-                  userDetails.image?.isNotEmpty == true) {
-                imageUrl = "${HttpService.profileImageUrl}${userDetails.image}";
+              if (userDetails.user?.image != null &&
+                  userDetails.user?.image?.isNotEmpty == true) {
+                imageUrl =
+                    "${HttpService.profileImageUrl}${userDetails.user?.image}";
               } else {
                 imageUrl =
-                "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg";
+                    "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg";
               }
 
               return Column(
@@ -51,28 +52,27 @@ class EditProfilePage extends GetWidget<EditProfileController> {
                     child: GetBuilder<ImageController>(
                       // specify type as Controller
                       init: ImageController(),
-                      builder: (value) =>
-                          Container(
-                            margin: const EdgeInsets.only(top: 30),
-                            height: 150,
-                            width: 150,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: imageController.image.value == null
-                                    ? NetworkImage(imageUrl)
-                                    : FileImage(imageController.image.value!)
-                                as ImageProvider,
-                                fit: BoxFit.cover,
-                              ),
-                              border: Border.all(
-                                width: 1.0,
-                                color: Colors.grey,
-                              ),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(100.0),
-                              ),
-                            ),
+                      builder: (value) => Container(
+                        margin: const EdgeInsets.only(top: 30),
+                        height: 150,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: imageController.image.value == null
+                                ? NetworkImage(imageUrl)
+                                : FileImage(imageController.image.value!)
+                                    as ImageProvider,
+                            fit: BoxFit.cover,
                           ),
+                          border: Border.all(
+                            width: 1.0,
+                            color: Colors.grey,
+                          ),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(100.0),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -112,7 +112,7 @@ class EditProfilePage extends GetWidget<EditProfileController> {
                     errorText: controller.phoneError.value,
                     imeAction: TextInputAction.next,
                     initialCountryCode:
-                    controller.initialCountryCode.toString(),
+                        controller.initialCountryCode.toString(),
                     controller: controller.phoneController,
                     onNumberSelected: (phone) {
                       controller.mobileCode = phone.countryCode.obs;
@@ -168,7 +168,7 @@ class EditProfilePage extends GetWidget<EditProfileController> {
                   buildButton(
                     context,
                     translations.buttonUpdateProfile.tr,
-                        () async {
+                    () async {
                       FocusScope.of(context).unfocus();
                       if (!controller.isValid()) {
                         return;
@@ -196,7 +196,6 @@ class EditProfilePage extends GetWidget<EditProfileController> {
                         AuthResponse? loginUser = getLoginUser();
                         loginUser?.data?.user = response.data;
                         saveLoginUser(jsonEncode(loginUser?.toJson()));
-
 
                         toast.showSnackBar(SnackBar(
                           content: Text(response.message ?? ""),

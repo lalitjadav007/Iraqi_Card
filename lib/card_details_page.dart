@@ -1,11 +1,15 @@
 import 'package:cards_store/common_widgets.dart';
 import 'package:cards_store/models/card_details_response.dart';
+import 'package:cards_store/preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zaincash/zaincash.dart';
 
 import 'controller/card_details_controller.dart';
 import 'http/http_service.dart';
 import 'package:cards_store/resources/translation_keys.dart' as translations;
+
+import 'login_page.dart';
 
 class CardDetailsPage extends GetWidget<CardsDetailsController> {
   static var name = "/cardDetails";
@@ -133,6 +137,8 @@ class CardDetailsPage extends GetWidget<CardsDetailsController> {
                   ),
                 ),
                 const Spacer(),
+                Text(
+                    'Payment listener state : ${cardsDetailsController.paymentState.value}'),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
@@ -157,6 +163,15 @@ class CardDetailsPage extends GetWidget<CardsDetailsController> {
                         child: ElevatedButton(
                           onPressed: () {
                             //Get.offAndToNamed(LoginPage.name);
+                            if (getLoginUser() != null) {
+                              const ZainCash(
+                                  transactionId: "61b3976de65fb79d1b5ffc3c",
+                                  production: false,
+                                  closeOnSuccess: true,
+                                  closeOnError: true);
+                            } else {
+                              Get.offAndToNamed(LoginPage.name);
+                            }
                           },
                           child: Text(
                             translations.submit.tr,
