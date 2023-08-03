@@ -23,6 +23,7 @@ class HomeController extends GetxController {
   HomeController() {
     getRecommendedCards();
     setScrollListener();
+    getFeaturedCards();
   }
 
   Future<void> getRecommendedCards() async {
@@ -38,7 +39,6 @@ class HomeController extends GetxController {
         debugPrint(
             "recommendedList---> ${response.recommendedData.toString()}");
         recommendedCards.value = response.recommendedData ?? [];
-        getFeaturedCards();
       } else {
         message.value = "Unable to retrieve recommended cards.";
       }
@@ -53,7 +53,7 @@ class HomeController extends GetxController {
     scrollController.addListener(() async {
       if (scrollController.position.maxScrollExtent ==
           scrollController.position.pixels) {
-        if (allCards.length < (homeResponse?.total ?? 0)) {
+        if (homeResponse?.nextPageUrl != null) {
           pageIndex++;
           await getFeaturedCards();
           update();
@@ -64,12 +64,9 @@ class HomeController extends GetxController {
 
   Future<void> getFeaturedCards() async {
     featuredLoading.value = true;
-    final queryParameters = {'page': pageIndex};
-    debugPrint(HttpService.homeDataUrl);
-    final uri =
-        Uri.http('https://iraqicard.store/', 'api/home', queryParameters);
-    http.Response res = await http.get(uri);
-
+    debugPrint("${HttpService.homeDataUrl}?page=$pageIndex");
+    http.Response res =
+        await http.get(Uri.parse("${HttpService.homeDataUrl}?page=$pageIndex"));
     if (res.statusCode == 200) {
       HomeResponse? response = HomeResponse.fromJson(jsonDecode(res.body));
       debugPrint("featuredList---> ${response.data.toString()}");

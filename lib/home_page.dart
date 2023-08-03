@@ -4,6 +4,7 @@ import 'package:cards_store/resources/translation_keys.dart' as translations;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'card_details_page.dart';
 import 'http/http_service.dart';
 
 class HomePage extends GetWidget<HomeController> {
@@ -60,13 +61,19 @@ class HomePage extends GetWidget<HomeController> {
                     return AspectRatio(
                       aspectRatio: 1.5,
                       child: buildCardView(
-                        context,
-                        "${HttpService.subcategoryImageUrl}${recommendedCard.subcategoryImage}",
-                        "${HttpService.subcategoryImageUrl}${recommendedCard.subcategoryImage}",
-                        "${recommendedCard.categoryName} ${recommendedCard.subcategoryName}",
-                        "\$${(double.parse(recommendedCard.price ?? "0.00")).toStringAsFixed(2)}",
-                        showAtEnd: true,
-                      ),
+                          context,
+                          "${HttpService.subcategoryImageUrl}${recommendedCard.subcategoryImage}",
+                          "${HttpService.subcategoryImageUrl}${recommendedCard.subcategoryImage}",
+                          "${recommendedCard.categoryName} ${recommendedCard.subcategoryName}",
+                          "\$${(double.parse(recommendedCard.price ?? "0.00")).toStringAsFixed(2)}",
+                          showAtEnd: true, onTap: () {
+                        Get.toNamed(CardDetailsPage.name, arguments: [
+                          {
+                            "subcategory_id":
+                                int.parse(recommendedCard.subcategoryId ?? "0")
+                          }
+                        ]);
+                      }),
                     );
                   },
                 ),
@@ -116,7 +123,15 @@ class HomePage extends GetWidget<HomeController> {
                         "${HttpService.subcategoryImageUrl}${featuredCard.subcategoryImage}",
                         "${HttpService.subcategoryImageUrl}${featuredCard.subcategoryImage}",
                         "${featuredCard.categoryName} ${featuredCard.subcategoryName}",
-                        "\$${(double.parse(featuredCard.price ?? "0.00")).toStringAsFixed(2)}");
+                        "\$${(double.parse(featuredCard.price ?? "0.00")).toStringAsFixed(2)}",
+                        onTap: () {
+                      Get.toNamed(CardDetailsPage.name, arguments: [
+                        {
+                          "subcategory_id":
+                              int.parse(featuredCard.subcategoryId ?? "0")
+                        }
+                      ]);
+                    });
                   },
                 ),
               );
