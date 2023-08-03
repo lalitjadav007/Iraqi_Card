@@ -46,8 +46,10 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const FlutterLogo(
-                  size: 70,
+                Image.asset(
+                  "assets/images/app_logo.png",
+                  scale: 1.0,
+                  height: 150,
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 70, left: 10, right: 10),
