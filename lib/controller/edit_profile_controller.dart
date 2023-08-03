@@ -31,7 +31,7 @@ class EditProfileController extends GetxController {
   Rx<String?> lastnameError = null.obs;
   Rx<String?> emailError = null.obs;
   Rx<String?> phoneError = null.obs;
-  Rx<String?> initialCountryCode = null.obs;
+  Rx<String?> initialCountryCode = "".obs;
   Rx<String?> addressError = null.obs;
   Rx<String?> stateError = null.obs;
   Rx<String?> zipError = null.obs;
@@ -117,20 +117,19 @@ class EditProfileController extends GetxController {
   }
 
   void setupData() {
-    firstnameController.text = userProfile.value.data?[0].user?.firstname ?? "";
-    lastnameController.text = userProfile.value.data?[0].user?.lastname ?? "";
-    emailController.text = userProfile.value.data?[0].user?.email ?? "";
-    var phone = userProfile.value.data?[0].user?.mobile;
-    initialCountryCode.value =
-        userProfile.value.data?[0].user?.countryCode ?? "AF";
+    var userDetails = userProfile.value.data?[0].user;
+    firstnameController.text = userDetails?.firstname ?? "";
+    lastnameController.text = userDetails?.lastname ?? "";
+    emailController.text = userDetails?.email ?? "";
+    var phone = userDetails?.mobile;
+    debugPrint(phone);
+    initialCountryCode.value = userDetails?.countryCode ?? "AF";
     phoneController.text = phone ?? "";
-    addressController.text =
-        "${userProfile.value.data?[0].user?.address?.address}";
-    stateController.text = "${userProfile.value.data?[0].user?.address?.state}";
-    zipController.text = "${userProfile.value.data?[0].user?.address?.zip}";
-    cityController.text = "${userProfile.value.data?[0].user?.address?.city}";
-    countryController.text =
-        "${userProfile.value.data?[0].user?.address?.country}";
+    addressController.text = "${userDetails?.address?.address}";
+    stateController.text = "${userDetails?.address?.state}";
+    zipController.text = "${userDetails?.address?.zip}";
+    cityController.text = "${userDetails?.address?.city}";
+    countryController.text = "${userDetails?.address?.country}";
   }
 
   bool isValid() {
