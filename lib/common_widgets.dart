@@ -94,7 +94,10 @@ Padding buildTextField(BuildContext context,
     String? prefixText = "",
     int? maxLength,
     String? errorText,
-    TextInputType? inputType}) {
+    TextInputType? inputType,
+    bool? isPassword = false,
+    VoidCallback? togglePasswordView,
+    bool? isHidden}) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 5),
     child: Container(
@@ -105,6 +108,7 @@ Padding buildTextField(BuildContext context,
       child: TextFormField(
           keyboardType: inputType,
           cursorColor: Colors.black54,
+          obscureText: isPassword == true ? isHidden == true : false,
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.transparent,
@@ -112,6 +116,16 @@ Padding buildTextField(BuildContext context,
             labelText: label,
             border: InputBorder.none,
             hintText: label,
+            suffix: isPassword == true
+                ? InkWell(
+                    onTap: togglePasswordView,
+                    child: Icon(
+                      isHidden == true
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                    ),
+                  )
+                : null,
             hintStyle: const TextStyle(color: Color(0xffada3a3)),
             errorText: errorText,
           ),

@@ -25,9 +25,9 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController lastnameController = TextEditingController(text: "");
   final TextEditingController emailController = TextEditingController(text: "");
   final TextEditingController passwordController =
-  TextEditingController(text: "");
+      TextEditingController(text: "");
   TextEditingController confirmPasswordController =
-  TextEditingController(text: "");
+      TextEditingController(text: "");
   TextEditingController phoneController = TextEditingController(text: "");
   TextEditingController usernameController = TextEditingController(text: "");
   String? firstnameError,
@@ -44,6 +44,8 @@ class _SignupPageState extends State<SignupPage> {
       mobile = "";
 
   bool agree = false;
+  bool _isHidden = true;
+  bool _isConfHidden = true;
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +57,7 @@ class _SignupPageState extends State<SignupPage> {
         centerTitle: true,
       ),
       body: Container(
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
+        width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         child: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -71,17 +70,11 @@ class _SignupPageState extends State<SignupPage> {
               ),
               Text(
                 "Let's get you started",
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .headlineSmall,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
               Text(
                 "Fill in the form below, correctly",
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .bodyLarge,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               Container(
                 margin: const EdgeInsets.only(top: 30),
@@ -157,6 +150,9 @@ class _SignupPageState extends State<SignupPage> {
                   errorText: passwordError,
                   imeAction: TextInputAction.next,
                   controller: passwordController,
+                  isPassword: true,
+                  isHidden: _isHidden,
+                  togglePasswordView: _togglePasswordView,
                 ),
               ),
               Container(
@@ -169,16 +165,16 @@ class _SignupPageState extends State<SignupPage> {
                   errorText: confirmPasswordError,
                   imeAction: TextInputAction.done,
                   controller: confirmPasswordController,
+                  isPassword: true,
+                  isHidden: _isConfHidden,
+                  togglePasswordView: _toggleConfPasswordView,
                 ),
               ),
               CheckboxListTile(
                 contentPadding: EdgeInsets.zero,
                 title: Text(
                   'I accept all Terms of Service , Privacy Policy',
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodyMedium,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 value: agree,
                 controlAffinity: ListTileControlAffinity.leading,
@@ -263,18 +259,18 @@ class _SignupPageState extends State<SignupPage> {
                   );
 
                   RegisterResponse? response =
-                  await signupController.registerUser(
-                      firstnameController.text,
-                      lastnameController.text,
-                      usernameController.text,
-                      emailController.text,
-                      mobile ?? "",
-                      passwordController.text,
-                      passwordController.text,
-                      agree.toString(),
-                      mobileCode ?? "",
-                      countryCode ?? "",
-                      country ?? "");
+                      await signupController.registerUser(
+                          firstnameController.text,
+                          lastnameController.text,
+                          usernameController.text,
+                          emailController.text,
+                          mobile ?? "",
+                          passwordController.text,
+                          passwordController.text,
+                          agree.toString(),
+                          mobileCode ?? "",
+                          countryCode ?? "",
+                          country ?? "");
 
                   Get.back();
                   if (response != null) {
@@ -294,20 +290,13 @@ class _SignupPageState extends State<SignupPage> {
                     text: TextSpan(children: [
                       TextSpan(
                           text: 'Already have an account ',
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .bodyMedium),
+                          style: Theme.of(context).textTheme.bodyMedium),
                       TextSpan(
                         text: 'Sign In',
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.deepPurple,
-                        ),
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.deepPurple,
+                            ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             Get.back();
@@ -393,5 +382,17 @@ class _SignupPageState extends State<SignupPage> {
       return translations.invalidPhoneValidation.tr;
     }
     return null;
+  }
+
+  void _togglePasswordView() {
+    setState(() {
+      _isHidden = !_isHidden;
+    });
+  }
+
+  void _toggleConfPasswordView() {
+    setState(() {
+      _isConfHidden = !_isConfHidden;
+    });
   }
 }

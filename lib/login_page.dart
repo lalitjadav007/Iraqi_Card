@@ -24,11 +24,12 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   var loginController = Get.put(LoginController());
   final TextEditingController usernameController =
-  TextEditingController(text: "");
+      TextEditingController(text: "");
   final TextEditingController passwordController =
-  TextEditingController(text: "");
+      TextEditingController(text: "");
 
   String? usernameError, passwordError;
+  bool _isHidden = true;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,9 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16,),
+        padding: EdgeInsets.symmetric(
+          horizontal: 16,
+        ),
         child: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -68,6 +71,9 @@ class _LoginPageState extends State<LoginPage> {
                     errorText: passwordError,
                     imeAction: TextInputAction.done,
                     controller: passwordController,
+                    isPassword: true,
+                    isHidden: _isHidden,
+                    togglePasswordView: _togglePasswordView,
                   ),
                 ),
                 Container(
@@ -84,8 +90,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child:
-                  buildButton(context, translations.buttonLogin.tr, () async {
+                  child: buildButton(context, translations.buttonLogin.tr,
+                      () async {
                     setState(() {
                       _usernameErrorText != null
                           ? usernameError = _usernameErrorText
@@ -140,10 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                     padding: EdgeInsets.all(10),
                     child: Text(
                       translations.createAccount.tr,
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .bodyMedium,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
                 ),
@@ -172,5 +175,11 @@ class _LoginPageState extends State<LoginPage> {
       return translations.passwordLengthValidation.tr;
     }
     return null;
+  }
+
+  void _togglePasswordView() {
+    setState(() {
+      _isHidden = !_isHidden;
+    });
   }
 }
